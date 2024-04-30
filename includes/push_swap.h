@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 04:01:49 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/01 04:10:57 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ typedef struct s_stack
 	t_node *top; // スタックの先頭ノードへのポインタ
 	t_node *end; // スタックの最後尾ノードへのポインタ
 }		t_stack;
+
+typedef struct s_data
+{
+	t_stack a; // スタックA
+	t_stack b; // スタックB
+}		t_data;
 
 // スタック操作関数
 void	push_a(t_stack *a, t_stack *b);
