@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 03:50:57 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/01 04:01:49 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
+# include <limits.h>
 
 // スタックのノード構造体定義
 typedef struct s_node
