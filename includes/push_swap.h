@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 03:33:42 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/01 03:42:10 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,20 @@ typedef struct s_stack
 }		t_stack;
 
 // スタック操作関数
-void	swap_a(t_stack *a);             // スタックAの上2つの要素を交換
-void	swap_b(t_stack *b);             // スタックBの上2つの要素を交換
 void	push_a(t_stack *a, t_stack *b); // スタックBのトップをスタックAにプッシュ
 void	push_b(t_stack *a, t_stack *b); // スタックAのトップをスタックBにプッシュ
+
 void	rotate_a(t_stack *a);           // スタックAを1つ上へローテート
 void	rotate_b(t_stack *b);           // スタックBを1つ上へローテート
+void	rotate_r(t_stack *a, t_stack *b); // スタックAとスタックBを1つ上へローテート
+
 void	reverse_rotate_a(t_stack *a);   // スタックAを1つ下へローテート
 void	reverse_rotate_b(t_stack *b);   // スタックBを1つ下へローテート
+void	reverse_rotate_r(t_stack *a, t_stack *b); // スタックAとスタックBを1つ下へローテート
+
+void	swap_a(t_stack *a);             // スタックAの上2つの要素を交換
+void	swap_b(t_stack *b);             // スタックBの上2つの要素を交換
+void	swap_s(t_stack *a, t_stack *b); // スタックAとスタックBの上2つの要素を交換
 
 // ソート関連関数
 void	radix_sort(t_stack *a, t_stack *b); // 基数ソート
