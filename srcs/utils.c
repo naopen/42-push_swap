@@ -6,24 +6,39 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:08:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 04:19:10 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/01 12:54:25 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_data	*data_init(t_data *data)
+t_data	*data_init(void)
 {
-	t_data	*data;
+	t_data	*new_data;
 
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
+	new_data = (t_data *)malloc(sizeof(t_data));
+	if (!new_data)
 		exit(1);
-	data->a.top = NULL;
-	data->a.end = NULL;
-	data->b.top = NULL;
-	data->b.end = NULL;
-	return (data);
+	new_data->a.top = NULL;
+	new_data->a.end = NULL;
+	new_data->b.top = NULL;
+	new_data->b.end = NULL;
+	return (new_data);
+}
+
+void	add_value_to_stack(t_stack *stack, int value)
+{
+	t_node	*new_node;
+
+	new_node = malloc(sizeof(t_node));
+	if (!new_node)
+		malloc_error();
+	new_node->value = value;
+	new_node->next = stack->top;
+	new_node->prev = NULL;
+	if (stack->top != NULL)
+		stack->top->prev = new_node;
+	stack->top = new_node;
 }
 
 void	free_stack(t_stack *stack)

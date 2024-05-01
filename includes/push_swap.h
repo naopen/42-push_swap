@@ -6,35 +6,35 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 04:10:57 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/01 12:53:01 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdlib.h>
+# include "../libft/libft.h"
 # include <limits.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-// スタックのノード構造体定義
 typedef struct s_node
 {
-	int value;           // ノードが保持する数値
-	struct s_node *next; // 次のノードへのポインタ
-	struct s_node *prev; // 前のノードへのポインタ
+	int value;
+	struct s_node *next;
+	struct s_node *prev;
 }		t_node;
 
-// スタック全体を管理する構造体定義
 typedef struct s_stack
 {
-	t_node *top; // スタックの先頭ノードへのポインタ
-	t_node *end; // スタックの最後尾ノードへのポインタ
+	t_node *top;
+	t_node *end;
 }		t_stack;
 
 typedef struct s_data
 {
-	t_stack a; // スタックA
-	t_stack b; // スタックB
+	t_stack a;
+	t_stack b;
 }		t_data;
 
 // スタック操作関数
@@ -57,8 +57,19 @@ void	swap_s(t_stack *a, t_stack *b);
 void	radix_sort(t_stack *a, t_stack *b); // 基数ソート
 
 // ユーティリティ関数
+void	add_value_to_stack(t_stack *stack, int value); // スタックに値を追加
 int	stack_size(t_stack *stack); // スタックのサイズ（要素数）を計算
 int	stack_max(t_stack *stack);  // スタック内の最大値を探す
 int	stack_min(t_stack *stack);  // スタック内の最小値を探す
+
+// エラー関連関数
+void	args_error(void);  // 引数エラー
+void	malloc_error(void); // メモリ確保エラー
+
+// メモリ解放関数
+t_data	*data_init(void);
+void	free_stack(t_stack *stack); // スタックのメモリを解放
+void	free_data(t_data *data);    // データ構造体のメモリを解放
+
 
 #endif
