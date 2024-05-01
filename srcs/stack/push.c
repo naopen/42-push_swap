@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:38:27 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 03:42:40 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/01 13:21:18 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	push_a(t_stack *a, t_stack *b)
 	node->next = a->top;
 	node->prev = NULL;
 	a->top = node;
+	ft_putendl_fd("pa", 1);
 }
 
 // Push the top of stack A to stack B
@@ -46,4 +47,5 @@ void	push_b(t_stack *a, t_stack *b)
 	node->next = b->top;
 	node->prev = NULL;
 	b->top = node;
+	ft_putendl_fd("pb", 1);
 }

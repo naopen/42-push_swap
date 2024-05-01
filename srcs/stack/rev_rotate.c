@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:43:22 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 03:43:40 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/01 13:21:49 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	rev_rotate_a(t_stack *a)
 	node->next = a->top;
 	a->top->prev = node;
 	a->top = node;
+	ft_putendl_fd("rra", 1);
 }
 
 // Rotate stack B down by one
@@ -42,6 +43,7 @@ void	rev_rotate_b(t_stack *b)
 	node->next = b->top;
 	b->top->prev = node;
 	b->top = node;
+	ft_putendl_fd("rrb", 1);
 }
 
 // Rotate both stacks down by one

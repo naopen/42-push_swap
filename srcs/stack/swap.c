@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:37:05 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 03:44:53 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/01 13:22:54 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	swap_a(t_stack *a)
 	first->prev = second;
 	second->prev = NULL;
 	a->top = second;
+	ft_putendl_fd("sa", 1);
 }
 
 // Replace the top two elements of stack B
@@ -44,6 +45,7 @@ void	swap_b(t_stack *b)
 	first->prev = second;
 	second->prev = NULL;
 	b->top = second;
+	ft_putendl_fd("sb", 1);
 }
 
 // Replace the top two elements of both stacks
