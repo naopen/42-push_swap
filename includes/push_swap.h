@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 12:53:01 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/01 17:15:22 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_data
 	t_stack b;
 }		t_data;
 
-// スタック操作関数
 void	push_a(t_stack *a, t_stack *b);
 void	push_b(t_stack *a, t_stack *b);
 
@@ -53,23 +52,26 @@ void	swap_a(t_stack *a);
 void	swap_b(t_stack *b);
 void	swap_s(t_stack *a, t_stack *b);
 
-// ソート関連関数
-void	radix_sort(t_stack *a, t_stack *b); // 基数ソート
+void	radix_sort(t_stack *stack, int size);
 
-// ユーティリティ関数
-void	add_value_to_stack(t_stack *stack, int value); // スタックに値を追加
-int	stack_size(t_stack *stack); // スタックのサイズ（要素数）を計算
-int	stack_max(t_stack *stack);  // スタック内の最大値を探す
-int	stack_min(t_stack *stack);  // スタック内の最小値を探す
+void	stack_to_array(t_stack *stack, int *array);
+void	array_to_stack(int *array, t_stack *stack, int size);
+void	value_to_stack(t_stack *stack, int value);
 
-// エラー関連関数
-void	args_error(void);  // 引数エラー
-void	malloc_error(void); // メモリ確保エラー
+int	stack_size(t_stack *stack);
+int	stack_max(t_stack *stack);
+int	stack_min(t_stack *stack);
 
-// メモリ解放関数
+void	args_error(void);
+void	malloc_error(void);
+
 t_data	*data_init(void);
-void	free_stack(t_stack *stack); // スタックのメモリを解放
-void	free_data(t_data *data);    // データ構造体のメモリを解放
+void	free_stack(t_stack *stack);
+void	free_data(t_data *data);
+
+
+
+
 
 
 #endif

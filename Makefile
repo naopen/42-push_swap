@@ -6,7 +6,7 @@
 #    By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:08:09 by nkannan           #+#    #+#              #
-#    Updated: 2024/05/01 12:42:05 by nkannan          ###   ########.fr        #
+#    Updated: 2024/05/01 17:16:07 by nkannan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,8 @@ LIBFT_DIR = libft
 SRC_DIR = srcs
 OBJ_DIR = objs
 INC_DIR = includes
-SRCS = errors.c main.c sort.c utils.c \
-		stack/push.c stack/rotate.c stack/swap.c stack/rev_rotate.c \
-		stack/stack_utils.c
+SRCS = errors.c main.c metrics.c setup.c sort.c transfer.c \
+		actions/push.c actions/rotate.c actions/swap.c actions/rev_rotate.c
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 NAME = push_swap
 

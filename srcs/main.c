@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:02:15 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 12:47:17 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/01 17:15:47 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	parse_args(t_data *data, int argc, char *argv[])
 			value = ft_atoi(&argv[i][j]);
 			if (value > INT_MAX || value < INT_MIN)
 				args_error();
-			add_value_to_stack(&data->a, value);
+			value_to_stack(&data->a, value);
 			while (ft_isdigit(argv[i][j]) || argv[i][j] == '-')
 				j++;
-			while (argv[i][j] && !ft_isdigit(argv[i][j]) && argv[i][j] != '-')
+			while (argv[i][j] == ' ')
 				j++;
 		}
 		i++;
@@ -67,7 +67,7 @@ int	main(int argc, char *argv[])
 	validate_args(argc, argv);
 	data = data_init();
 	parse_args(data, argc, argv);
-	radix_sort(&data->a, &data->b);
+	radix_sort(&data->a, stack_size(&data->a));
 	free_data(data);
 	return (0);
 }

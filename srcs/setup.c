@@ -1,60 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 04:06:11 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 12:54:15 by nkannan          ###   ########.fr       */
+/*   Created: 2024/05/01 04:08:12 by nkannan           #+#    #+#             */
+/*   Updated: 2024/05/01 17:14:02 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	stack_size(t_stack *stack)
+t_data	*data_init(void)
 {
-	int		size;
-	t_node	*node;
+	t_data	*new_data;
 
-	size = 0;
-	node = stack->top;
-	while (node)
-	{
-		size++;
-		node = node->next;
-	}
-	return (size);
+	new_data = (t_data *)malloc(sizeof(t_data));
+	if (!new_data)
+		exit(1);
+	new_data->a.top = NULL;
+	new_data->a.end = NULL;
+	new_data->b.top = NULL;
+	new_data->b.end = NULL;
+	return (new_data);
 }
 
-int	stack_max(t_stack *stack)
+void	free_stack(t_stack *stack)
 {
-	int		max;
 	t_node	*node;
+	t_node	*tmp;
 
-	max = INT_MIN;
 	node = stack->top;
 	while (node)
 	{
-		if (node->value > max)
-			max = node->value;
+		tmp = node;
 		node = node->next;
+		free(tmp);
 	}
-	return (max);
 }
 
-int	stack_min(t_stack *stack)
+void	free_data(t_data *data)
 {
-	int		min;
-	t_node	*node;
-
-	min = INT_MAX;
-	node = stack->top;
-	while (node)
-	{
-		if (node->value < min)
-			min = node->value;
-		node = node->next;
-	}
-	return (min);
+	free_stack(&data->a);
+	free_stack(&data->b);
+	free(data);
 }
