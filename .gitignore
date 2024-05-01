@@ -1,5 +1,6 @@
 # Project specific
 push_swap
+push_swap_tester/
 
 # Executables
 *.out
@@ -8,7 +9,7 @@ push_swap
 *.dSYM/
 
 # Object files
-obj/
+objs/
 *.o
 
 # Libraries
