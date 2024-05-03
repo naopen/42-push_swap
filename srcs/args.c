@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 04:01:48 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/04 04:02:02 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/04 04:05:19 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	has_duplicates(int argc, char *argv[])
 		j = i + 1;
 		while (j < argc)
 		{
-			if (ft_strcmp(argv[i], argv[j]) == 0)
+			if (ft_memcmp(argv[i], argv[j], ft_strlen(argv[i]) + 1) == 0)
 				return (1);
 			j++;
 		}
