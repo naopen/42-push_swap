@@ -6,32 +6,11 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:02:15 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 17:15:47 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/04 04:02:33 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-void	validate_args(int argc, char *argv[])
-{
-	int		i;
-	int		j;
-
-	i = 1;
-	while (i < argc)
-	{
-		j = 0;
-		if (ft_strlen(argv[i]) == 0)
-			args_error();
-		while (argv[i][j])
-		{
-			if (!ft_isdigit(argv[i][j]) && argv[i][j] != '-')
-				args_error();
-			j++;
-		}
-		i++;
-	}
-}
 
 void	parse_args(t_data *data, int argc, char *argv[])
 {
