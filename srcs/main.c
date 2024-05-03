@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:02:15 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/04 04:02:33 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/04 04:24:33 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	main(int argc, char *argv[])
 {
 	t_data	*data;
 
-	if (argc == 1)
-		args_error();
 	validate_args(argc, argv);
 	data = data_init();
 	parse_args(data, argc, argv);
