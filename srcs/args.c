@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 04:01:48 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/05 07:39:21 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/05 08:37:35 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,6 @@ static int	has_duplicates(int argc, char *argv[])
 	return (0);
 }
 
-static int	is_integer(char *str)
-{
-	long	num;
-	char	*tmp;
-
-	num = ft_atol(str);
-	if (num < INT_MIN || num > INT_MAX)
-		return (0);
-	tmp = ft_itoa(num);
-	if (ft_strcmp(str, tmp) != 0)
-	{
-		free(tmp);
-		return (0);
-	}
-	free(tmp);
-	return (1);
-}
-
 void	validate_args(int argc, char *argv[])
 {
 	int	i;
@@ -78,7 +60,7 @@ void	validate_args(int argc, char *argv[])
 	i = 1;
 	while (i < argc)
 	{
-		if (!is_integer(argv[i]))
+		if (!ft_isinteger(argv[i]))
 			args_error();
 		i++;
 	}
