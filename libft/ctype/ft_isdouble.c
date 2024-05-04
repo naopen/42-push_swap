@@ -6,34 +6,44 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 23:47:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/04/22 00:03:41 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:35:55 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-bool	ft_isdouble(char *str)
+static bool	check_format(char *str, bool *is_dot, bool *has_digit)
 {
 	size_t	i;
-	bool	is_dot;
 
-	is_dot = false;
 	i = 0;
-	if (str == NULL || *str == '\0')
-		return (false);
-	if (*str == '-')
-		str++;
 	while (str[i])
 	{
 		if (str[i] == '.')
 		{
-			if (is_dot)
+			if (*is_dot)
 				return (false);
-			is_dot = true;
+			*is_dot = true;
 		}
-		else if (!ft_isdigit(str[i]))
+		else if (ft_isdigit(str[i]))
+			*has_digit = true;
+		else
 			return (false);
 		i++;
 	}
 	return (true);
+}
+
+bool	ft_isdouble(char *str)
+{
+	bool	is_dot;
+	bool	has_digit;
+
+	is_dot = false;
+	has_digit = false;
+	if (str == NULL || *str == '\0')
+		return (false);
+	if (*str == '-' || *str == '+')
+		str++;
+	return (check_format(str, &is_dot, &has_digit) && has_digit);
 }
