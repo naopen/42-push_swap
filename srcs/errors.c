@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:19:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 12:05:45 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/05 07:37:51 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	args_error(void)
 {
 	ft_putstr_fd("Error\n", 2);
-	exit(1);
+	exit(EXIT_FAILURE);
 }
 
 void	malloc_error(void)
 {
-	exit(1);
+	exit(EXIT_FAILURE);
 }
