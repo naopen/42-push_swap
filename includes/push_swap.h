@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 17:15:22 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/05 08:38:26 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ t_data	*data_init(void);
 void	free_stack(t_stack *stack);
 void	free_data(t_data *data);
 
-
-
-
-
+void	validate_args(int argc, char *argv[]);
 
 #endif
