@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/05 08:38:26 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/16 05:33:52 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ void	rotate_a(t_stack *a);
 void	rotate_b(t_stack *b);
 void	rotate_r(t_stack *a, t_stack *b);
 
-void	reverse_rotate_a(t_stack *a);
-void	reverse_rotate_b(t_stack *b);
-void	reverse_rotate_r(t_stack *a, t_stack *b);
+void	rev_rotate_a(t_stack *a);
+void	rev_rotate_b(t_stack *b);
+void	rev_rotate_r(t_stack *a, t_stack *b);
 
 void	swap_a(t_stack *a);
 void	swap_b(t_stack *b);
 void	swap_s(t_stack *a, t_stack *b);
 
-void	radix_sort(t_stack *stack, int size);
+void	radix_sort(t_stack *a, t_stack *b, int size);
 
 void	stack_to_array(t_stack *stack, int *array);
 void	array_to_stack(int *array, t_stack *stack, int size);

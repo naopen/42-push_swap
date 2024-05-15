@@ -6,75 +6,68 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:18:03 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 17:11:42 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/16 05:34:06 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	countingSortForRadix(int *array, int size, int place)
+static void	sort_three(t_stack *a)
 {
-	int	*output;
-	int	count[10];
-	int	i;
-	int	index;
-
-	output = malloc(sizeof(int) * size);
-	if (!output)
-		return ;
-	i = 0;
-	while (i < 10)
+	if (a->top->value > a->top->next->value)
+		swap_a(a);
+	if (a->top->next->value > a->end->value)
 	{
-		count[i] = 0;
-		i++;
+		rev_rotate_a(a);
+		if (a->top->value > a->top->next->value)
+			swap_a(a);
 	}
-	i = 0;
-	while (i < size)
-	{
-		index = (array[i] / place) % 10;
-		count[index]++;
-		i++;
-	}
-	i = 1;
-	while (i < 10)
-	{
-		count[i] += count[i - 1];
-		i++;
-	}
-	i = size - 1;
-	while (i >= 0)
-	{
-		index = (array[i] / place) % 10;
-		output[count[index] - 1] = array[i];
-		count[index]--;
-		i--;
-	}
-	i = 0;
-	while (i < size)
-	{
-		array[i] = output[i];
-		i++;
-	}
-	free(output);
 }
 
-void	radix_sort(t_stack *stack, int size)
+static void	sort_small(t_stack *a, t_stack *b)
 {
-	int	maxVal;
-	int	*array;
-	int	place;
+	while (stack_size(a) > 3)
+		push_b(a, b);
+	sort_three(a);
+	while (stack_size(b) > 0)
+		push_a(a, b);
+}
 
-	array = malloc(size * sizeof(int));
-	if (!array)
-		return ;
-	stack_to_array(stack, array);
-	maxVal = stack_max(stack);
-	place = 1;
-	while (maxVal / place > 0)
+void	radix_sort(t_stack *a, t_stack *b, int size)
+{
+	int	i;
+	int	j;
+	int	max_bits;
+	int	max_num;
+
+	max_num = stack_max(a);
+	max_bits = 0;
+	while ((max_num >> max_bits) != 0)
+		max_bits++;
+	i = 0;
+	while (i < max_bits)
 	{
-		countingSortForRadix(array, size, place);
-		place *= 10;
+		j = 0;
+		while (j < size)
+		{
+			if (((a->top->value >> i) & 1) == 1)
+				rotate_a(a);
+			else
+				push_b(a, b);
+			j++;
+		}
+		while (stack_size(b) > 0)
+			push_a(a, b);
+		i++;
 	}
-	array_to_stack(array, stack, size);
-	free(array);
+}
+
+void	sort(t_data *data)
+{
+	if (stack_size(&data->a) <= 3)
+		sort_three(&data->a);
+	else if (stack_size(&data->a) <= 6)
+		sort_small(&data->a, &data->b);
+	else
+		radix_sort(&data->a, &data->b, stack_size(&data->a));
 }
