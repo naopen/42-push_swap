@@ -6,13 +6,13 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:02:15 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/16 05:30:38 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 04:02:41 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	parse_args(t_data *data, int argc, char *argv[])
+void	parse_args(t_sort_env *data, int argc, char *argv[])
 {
 	int		i;
 	int		j;
@@ -39,14 +39,12 @@ void	parse_args(t_data *data, int argc, char *argv[])
 
 int	main(int argc, char *argv[])
 {
-	t_data	*data;
+	t_sort_env	*data;
 
-	if (argc <= 1)
-		return (0);
 	validate_args(argc, argv);
 	data = data_init();
 	parse_args(data, argc, argv);
-	radix_sort(&data->a, &data->b, stack_size(&data->a));
+	sort(data);
 	free_data(data);
 	return (0);
 }

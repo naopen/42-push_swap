@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:43:05 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 17:25:25 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 04:13:58 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	array_to_stack(int *array, t_stack *stack, int size)
 	t_node	*new_node;
 	int		i;
 
-	// free_stack(stack);
+	free_stack(stack);
 	stack->end = NULL;
 	i = 0;
 	while (i < size)
@@ -64,5 +64,7 @@ void	value_to_stack(t_stack *stack, int value)
 	new_node->prev = NULL;
 	if (stack->top != NULL)
 		stack->top->prev = new_node;
+	else
+		stack->end = new_node;
 	stack->top = new_node;
 }

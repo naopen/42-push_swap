@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup.c                                            :+:      :+:    :+:   */
+/*   init_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:08:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/04 04:02:58 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 01:45:15 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_data	*data_init(void)
+t_sort_env	*data_init(void)
 {
-	t_data	*new_data;
+	t_sort_env	*new_data;
 
-	new_data = (t_data *)malloc(sizeof(t_data));
+	new_data = (t_sort_env *)malloc(sizeof(t_sort_env));
 	if (!new_data)
 		exit(1);
 	new_data->a.top = NULL;
@@ -40,7 +40,7 @@ void	free_stack(t_stack *stack)
 	}
 }
 
-void	free_data(t_data *data)
+void	free_data(t_sort_env *data)
 {
 	free_stack(&data->a);
 	free_stack(&data->b);

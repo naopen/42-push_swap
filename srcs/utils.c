@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   metrics.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:06:11 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 16:55:48 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 03:17:17 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,9 @@ int	stack_min(t_stack *stack)
 		node = node->next;
 	}
 	return (min);
+}
+
+int	compare_int(const void *a, const void *b)
+{
+	return (*(int *)a - *(int *)b);
 }
