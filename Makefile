@@ -6,7 +6,7 @@
 #    By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:08:09 by nkannan           #+#    #+#              #
-#    Updated: 2024/05/19 04:04:25 by nkannan          ###   ########.fr        #
+#    Updated: 2024/05/19 04:26:20 by nkannan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -rf $(NAME).dSYM
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all

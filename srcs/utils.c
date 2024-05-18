@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:06:11 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 03:17:17 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 04:40:08 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,7 @@
 
 int	stack_size(t_stack *stack)
 {
-	int		size;
-	t_node	*node;
-
-	size = 0;
-	node = stack->top;
-	while (node)
-	{
-		size++;
-		node = node->next;
-	}
-	return (size);
+	return (stack->size); // Return the size directly
 }
 
 int	stack_max(t_stack *stack)

@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:02:15 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 04:02:41 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 08:33:46 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	parse_args(t_sort_env *data, int argc, char *argv[])
 		while (argv[i][j])
 		{
 			value = ft_atoi(&argv[i][j]);
+			printf("value: %d\n", value);
 			if (value > INT_MAX || value < INT_MIN)
 				args_error();
 			value_to_stack(&data->a, value);
@@ -44,6 +45,7 @@ int	main(int argc, char *argv[])
 	validate_args(argc, argv);
 	data = data_init();
 	parse_args(data, argc, argv);
+	printf("stacksize: %d\n", stack_size(&data->a));
 	sort(data);
 	free_data(data);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:08:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 01:45:15 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 04:40:40 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ t_sort_env	*data_init(void)
 		exit(1);
 	new_data->a.top = NULL;
 	new_data->a.end = NULL;
+	new_data->a.size = 0;
 	new_data->b.top = NULL;
 	new_data->b.end = NULL;
+	new_data->b.size = 0;
 	return (new_data);
 }
 

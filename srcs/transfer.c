@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:43:05 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 04:13:58 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 04:39:53 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,5 @@ void	value_to_stack(t_stack *stack, int value)
 	else
 		stack->end = new_node;
 	stack->top = new_node;
+	stack->size++;
 }
