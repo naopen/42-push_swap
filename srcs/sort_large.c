@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 01:45:42 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 17:12:30 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 21:58:24 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ static void	quick_sort_array(int *arr, int low, int high)
 }
 
 // 座標圧縮を行う関数
-void	compress_coordinates(t_stack *a)
+void	compress_idx(t_stack *a)
 {
 	int		*array;
 	int		size;
 	t_node	*node;
 	int		i;
 
-	size = stack_size(a);
+	size = a->size;
 	array = (int *)calloc(size, sizeof(int));
 	stack_to_array(a, array);
 	quick_sort_array(array, 0, size - 1);
@@ -81,7 +81,7 @@ void	compress_coordinates(t_stack *a)
 		{
 			if (array[i] == node->value)
 			{
-				node->value = i;
+				node->index = i;
 				break ;
 			}
 			i++;
@@ -94,14 +94,14 @@ void	compress_coordinates(t_stack *a)
 // 回転操作の最適化
 void	optimized_rotate(t_stack *stack, int index)
 {
-	if (index <= stack_size(stack) / 2)
+	if (index <= stack->size / 2)
 	{
 		while (index-- > 0)
 			rotate_a(stack);
 	}
 	else
 	{
-		index = stack_size(stack) - index;
+		index = stack->size - index;
 		while (index-- > 0)
 			rev_rotate_a(stack);
 	}
@@ -148,31 +148,86 @@ int	partition_stack(t_sort_env *data, int *indices, int low, int high)
 	return (i + 1); // 戻り値を追加
 }
 
-static void	quick_sort_stack(t_sort_env *data, int *indices, int low, int high)
-{
-	int	pi;
+// static void	quick_sort_stack(t_sort_env *data, int *indices, int low, int high)
+// {
+// 	int	pi;
 
-	if (low < high)
+// 	if (low < high)
+// 	{
+// 		pi = partition_stack(data, indices, low, high);
+// 		quick_sort_stack(data, indices, low, pi - 1);
+// 		quick_sort_stack(data, indices, pi + 1, high);
+// 	}
+// }
+
+// スタックAの中央値を計算し、その値より小さい値をBに移動
+// スタックAのTOPの値を中央値と比較し、中央値より小さい場合はBに移動
+// それ以外の場合はAを回転させ、次の値を比較
+// is_sortedフラグの立っている値は、対象外
+
+void	push_half_to_b(t_stack *a, t_stack *b)
+{
+	int	median;
+	int	count;
+
+	median = (stack_max(a) + stack_min(a)) / 2;
+	count = 0;
+	while (count < a->size)
 	{
-		pi = partition_stack(data, indices, low, high);
-		quick_sort_stack(data, indices, low, pi - 1);
-		quick_sort_stack(data, indices, pi + 1, high);
+		if (get_stack_value(a, 0) < median)
+		{
+			push_b(a, b);
+			count++;
+		}
+		else
+			rotate_a(a);
 	}
 }
 
-void	sort_large(t_sort_env *data)
+// スタックBをクイックソート
+void	quick_sort_b(t_stack *b)
 {
-	int	*indices;
+	int	*array;
 	int	size;
 
-	compress_coordinates(&data->a);
-	size = stack_size(&data->a);
-	indices = (int *)calloc(size, sizeof(int));
-	if (!indices)
-		malloc_error();
-	quick_sort_stack(data, indices, 0, size - 1);
-	sort_three(&data->a);
-	while (stack_size(&data->b) > 0)
-		push_a(&data->a, &data->b);
-	free(indices);
+	size = stack_size(b);
+	array = (int *)calloc(size, sizeof(int));
+	stack_to_array(b, array);
+	quick_sort_array(array, 0, size - 1);
+	array_to_stack(array, b, size);
+	free(array);
+}
+
+// ソート済みのスタックBをis_sortedフラグを立ててスタックAに移動
+void	push_sorted_to_a(t_stack *a, t_stack *b)
+{
+	while (stack_size(b) > 0)
+	{
+		push_a(a, b);
+		a->sentinel->next->is_sorted = true;
+	}
+}
+
+// ステップ1: Aを半分に分割
+// Aの半分はそのまま残し、もう半分をBに移動
+// ステップ2: Bを繰り返し半分に分割
+// 分割するたびに、適切な処理(例: ソートや値の確定)を行う
+// ステップ3: Aの半分をBに移動し、再びBを分割
+// このステップは、AとB間で要素が移動し、Bがさらに細分化される
+// ステップ4: Bを再度分割
+// ステップ5: Aの末尾にソート済みの値を確定
+// このステップでは、Aに対してソートや値の確定を行う処理を実施
+void	sort_large(t_stack *a, t_stack *b)
+{
+
+	if (stack_size(a) <= 6)
+		return (sort_four_to_six(a, b));
+
+	while (unsorted_count(a) > 0)
+	{
+		compress_idx(a);
+		push_half_to_b(a, b);
+		quick_sort_b(b);
+		push_sorted_to_a(a, b);
+	}
 }
