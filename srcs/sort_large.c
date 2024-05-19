@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 01:45:42 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 21:58:24 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/20 00:49:53 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,44 +121,37 @@ void	optimized_push(t_stack *a, t_stack *b, int *indices, int count)
 
 int	partition_stack(t_sort_env *data, int *indices, int low, int high)
 {
-	int	pivot;
-	int	i;
-	int	j;
-	int	temp;
+    int pivot;
+    int i;
+    int j;
+    int temp;
 
-	pivot = get_stack_value(&data->a, high); // 修正: pivotの選択
-	i = low - 1;
-	j = low;
-	while (j <= high - 1)
-	{
-		if (get_stack_value(&data->a, j) < pivot) // 修正: 正しいインデックスの値を取得
-		{
-			i++;
-			temp = indices[i];
-			indices[i] = indices[j];
-			indices[j] = temp;
-		}
-		rotate_a(&data->a);
-		j++;
-	}
-	temp = indices[i + 1];
-	indices[i + 1] = indices[high];
-	indices[high] = temp;
-	optimized_push(&data->a, &data->b, indices, i + 1);
-	return (i + 1); // 戻り値を追加
+    pivot = get_stack_value(&data->a, high); // 高い位置にある要素をピボットとして選択
+    i = low - 1; // iは低いインデックスの一つ前から開始
+    j = low; // jは低いインデックスから開始
+    while (j <= high - 1) // 高いインデックスの一つ前までループ
+    {
+        if (get_stack_value(&data->a, j) < pivot) // もし現在の要素がピボットより小さいならば
+        {
+            i++; // iをインクリメント
+            // indicesのiとjの位置にある要素を交換
+            temp = indices[i];
+            indices[i] = indices[j];
+            indices[j] = temp;
+
+            // rotate_a(&data->a); この行を削除
+        }
+        j++; // jをインクリメント
+    }
+    // パーティションの最後でi+1と高いインデックスの要素を交換
+    temp = indices[i + 1];
+    indices[i + 1] = indices[high];
+    indices[high] = temp;
+
+    optimized_push(&data->a, &data->b, indices, i + 1); // 最適化されたプッシュ操作を実行
+    return (i + 1); // 新しいパーティションのインデックスを返す
 }
 
-// static void	quick_sort_stack(t_sort_env *data, int *indices, int low, int high)
-// {
-// 	int	pi;
-
-// 	if (low < high)
-// 	{
-// 		pi = partition_stack(data, indices, low, high);
-// 		quick_sort_stack(data, indices, low, pi - 1);
-// 		quick_sort_stack(data, indices, pi + 1, high);
-// 	}
-// }
 
 // スタックAの中央値を計算し、その値より小さい値をBに移動
 // スタックAのTOPの値を中央値と比較し、中央値より小さい場合はBに移動
@@ -169,20 +162,32 @@ void	push_half_to_b(t_stack *a, t_stack *b)
 {
 	int	median;
 	int	count;
+	int	total_elements;
+	int	checked_elements;
 
 	median = (stack_max(a) + stack_min(a)) / 2;
 	count = 0;
-	while (count < a->size)
+	total_elements = stack_size(a);
+	checked_elements = 0;
+
+	while (count < total_elements / 2 && checked_elements < total_elements)
 	{
-		if (get_stack_value(a, 0) < median)
+		if (a->sentinel->next->is_sorted == false)
 		{
-			push_b(a, b);
-			count++;
+			if (get_stack_value(a, 0) < median)
+			{
+				push_b(a, b);
+				count++;
+			}
+			else
+				rotate_a(a);
 		}
 		else
 			rotate_a(a);
+		checked_elements++;
 	}
 }
+
 
 // スタックBをクイックソート
 void	quick_sort_b(t_stack *b)
@@ -208,6 +213,19 @@ void	push_sorted_to_a(t_stack *a, t_stack *b)
 	}
 }
 
+// スタックがソートされているかを確認する関数
+bool is_sorted(t_stack *stack)
+{
+    t_node *current = stack->sentinel->next;
+    while (current->next != stack->sentinel)
+    {
+        if (current->value > current->next->value)
+            return false;
+        current = current->next;
+    }
+    return true;
+}
+
 // ステップ1: Aを半分に分割
 // Aの半分はそのまま残し、もう半分をBに移動
 // ステップ2: Bを繰り返し半分に分割
@@ -217,9 +235,9 @@ void	push_sorted_to_a(t_stack *a, t_stack *b)
 // ステップ4: Bを再度分割
 // ステップ5: Aの末尾にソート済みの値を確定
 // このステップでは、Aに対してソートや値の確定を行う処理を実施
+
 void	sort_large(t_stack *a, t_stack *b)
 {
-
 	if (stack_size(a) <= 6)
 		return (sort_four_to_six(a, b));
 
@@ -227,7 +245,13 @@ void	sort_large(t_stack *a, t_stack *b)
 	{
 		compress_idx(a);
 		push_half_to_b(a, b);
-		quick_sort_b(b);
+        while (stack_size(b) > SORT_SIZE)
+        {
+            quick_sort_b(b);
+            // スタックbがソートされたか確認する
+            if (is_sorted(b))
+                break;
+        }
 		push_sorted_to_a(a, b);
 	}
 }
