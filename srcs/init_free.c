@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:08:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 04:40:40 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 09:22:28 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,17 @@ t_sort_env	*data_init(void)
 	new_data = (t_sort_env *)malloc(sizeof(t_sort_env));
 	if (!new_data)
 		exit(1);
-	new_data->a.top = NULL;
-	new_data->a.end = NULL;
+	new_data->a.sentinel = malloc(sizeof(t_node));
+	if (!new_data->a.sentinel)
+		exit(1);
+	new_data->a.sentinel->next = new_data->a.sentinel;
+	new_data->a.sentinel->prev = new_data->a.sentinel;
 	new_data->a.size = 0;
-	new_data->b.top = NULL;
-	new_data->b.end = NULL;
-	new_data->b.size = 0;
+	new_data->b.sentinel = malloc(sizeof(t_node));
+	if (!new_data->b.sentinel)
+		exit(1);
+	new_data->b.sentinel->next = new_data->b.sentinel;
+	new_data->b.sentinel->prev = new_data->b.sentinel;
 	return (new_data);
 }
 

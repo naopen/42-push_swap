@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:43:05 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 04:39:53 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 09:15:49 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	array_to_stack(int *array, t_stack *stack, int size)
 	i = 0;
 	while (i < size)
 	{
-		new_node = (t_node *)malloc(sizeof(t_node));
+		new_node = (t_node *)ft_calloc(1, sizeof(t_node));
 		if (new_node == NULL)
 			malloc_error();
 		new_node->value = array[i];
@@ -56,16 +56,16 @@ void	value_to_stack(t_stack *stack, int value)
 {
 	t_node	*new_node;
 
-	new_node = malloc(sizeof(t_node));
+	new_node = ft_calloc(1, sizeof(t_node));
 	if (!new_node)
 		malloc_error();
 	new_node->value = value;
-	new_node->next = stack->top;
-	new_node->prev = NULL;
-	if (stack->top != NULL)
-		stack->top->prev = new_node;
+	new_node->next = NULL;
+	new_node->prev = stack->end;
+	if (stack->end != NULL)
+		stack->end->next = new_node;
 	else
-		stack->end = new_node;
-	stack->top = new_node;
+		stack->top = new_node;
+	stack->end = new_node;
 	stack->size++;
 }
