@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:18:03 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 09:46:00 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 10:24:12 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	sort_three(t_stack *a)
 }
 
 // Sort four, five or six elements in stack a
-// 1. Push a to b until a has 3 elements
+// 1. Push smallest elements to b until 3 elements remain in a
 // 2. Sort 3 elements in a
 // 3. Push b to a
 
@@ -77,10 +77,20 @@ void	sort_four_to_six(t_stack *a, t_stack *b)
 	int	push_count;
 
 	size = stack_size(a);
-	push_count = size - 3;
-	while (push_count--)
-		push_b(a, b);
+	push_count = 0;
+	while (size > 3)
+	{
+		if (a->sentinel->next->value == stack_min(a))
+		{
+			push_b(a, b);
+			push_count++;
+		}
+		else
+			rotate_a(a);
+		size = stack_size(a);
+	}
 	sort_three(a);
-	while (size--)
+	while (push_count-- > 0)
 		push_a(a, b);
+	// printf("a: %d %d %d %d %d %d\n", a->sentinel->next->value, a->sentinel->next->next->value, a->sentinel->next->next->next->value, a->sentinel->next->next->next->next->value, a->sentinel->next->next->next->next->next->value, a->sentinel->next->next->next->next->next->next->value);
 }
