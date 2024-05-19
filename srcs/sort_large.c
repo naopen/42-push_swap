@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 01:45:42 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 09:45:00 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 17:12:30 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void	compress_coordinates(t_stack *a)
 	int		i;
 
 	size = stack_size(a);
-	array = (int *)malloc(sizeof(int) * size);
+	array = (int *)calloc(size, sizeof(int));
 	stack_to_array(a, array);
 	quick_sort_array(array, 0, size - 1);
 	node = a->sentinel->next;
-	while (node)
+	while (node != a->sentinel)
 	{
 		i = 0;
 		while (i < size)
@@ -95,8 +95,10 @@ void	compress_coordinates(t_stack *a)
 void	optimized_rotate(t_stack *stack, int index)
 {
 	if (index <= stack_size(stack) / 2)
+	{
 		while (index-- > 0)
 			rotate_a(stack);
+	}
 	else
 	{
 		index = stack_size(stack) - index;
@@ -108,46 +110,67 @@ void	optimized_rotate(t_stack *stack, int index)
 // 選択の最適化
 void	optimized_push(t_stack *a, t_stack *b, int *indices, int count)
 {
-	while (count-- > 0)
-		optimized_rotate(a, indices[count]);
-	while (count-- > 0)
+	int	temp_count;
+
+	temp_count = count;
+	while (count > 0)
+		optimized_rotate(a, indices[--count]);
+	while (temp_count-- > 0)
 		push_b(a, b);
 }
 
-static void	partition_stack(t_sort_env *data, int *indices, int size, int median)
+int	partition_stack(t_sort_env *data, int *indices, int low, int high)
 {
+	int	pivot;
 	int	i;
-	int	count;
+	int	j;
+	int	temp;
 
-	count = 0;
-	i = 0;
-	while (i < size)
+	pivot = get_stack_value(&data->a, high); // 修正: pivotの選択
+	i = low - 1;
+	j = low;
+	while (j <= high - 1)
 	{
-		if (data->a.sentinel->next->value < median)
-			indices[count++] = i;
+		if (get_stack_value(&data->a, j) < pivot) // 修正: 正しいインデックスの値を取得
+		{
+			i++;
+			temp = indices[i];
+			indices[i] = indices[j];
+			indices[j] = temp;
+		}
 		rotate_a(&data->a);
-		i++;
+		j++;
 	}
-	optimized_push(&data->a, &data->b, indices, count);
-	while (stack_size(&data->b) > 0)
-		push_a(&data->a, &data->b);
+	temp = indices[i + 1];
+	indices[i + 1] = indices[high];
+	indices[high] = temp;
+	optimized_push(&data->a, &data->b, indices, i + 1);
+	return (i + 1); // 戻り値を追加
+}
+
+static void	quick_sort_stack(t_sort_env *data, int *indices, int low, int high)
+{
+	int	pi;
+
+	if (low < high)
+	{
+		pi = partition_stack(data, indices, low, high);
+		quick_sort_stack(data, indices, low, pi - 1);
+		quick_sort_stack(data, indices, pi + 1, high);
+	}
 }
 
 void	sort_large(t_sort_env *data)
 {
-	int		median;
-	int		size;
-	int		*indices;
+	int	*indices;
+	int	size;
 
 	compress_coordinates(&data->a);
 	size = stack_size(&data->a);
-	indices = (int *)malloc(sizeof(int) * size);
-	while (size > 3)
-	{
-		median = (stack_min(&data->a) + stack_max(&data->a)) / 2;
-		partition_stack(data, indices, size, median);
-		size = stack_size(&data->a);
-	}
+	indices = (int *)calloc(size, sizeof(int));
+	if (!indices)
+		malloc_error();
+	quick_sort_stack(data, indices, 0, size - 1);
 	sort_three(&data->a);
 	while (stack_size(&data->b) > 0)
 		push_a(&data->a, &data->b);

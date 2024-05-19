@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:06:11 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 09:32:52 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 17:06:30 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,21 @@ int	stack_min(t_stack *stack)
 int	compare_int(const void *a, const void *b)
 {
 	return (*(int *)a - *(int *)b);
+}
+
+int	get_stack_value(t_stack *stack, int index)
+{
+	t_node	*node;
+	int		i;
+
+	if (index < 0 || index >= stack_size(stack))
+		return (INT_MIN);
+	node = stack->sentinel->next;
+	i = 0;
+	while (i < index)
+	{
+		node = node->next;
+		i++;
+	}
+	return (node->value);
 }

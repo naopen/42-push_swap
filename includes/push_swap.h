@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 09:29:20 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 17:05:12 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,7 @@ void				sort_two(t_stack *a);
 void				sort_three(t_stack *a);
 void				sort_four_to_six(t_stack *a, t_stack *b);
 void				sort_large(t_sort_env *data);
+
+int get_stack_value(t_stack *stack, int index);
 
 #endif
