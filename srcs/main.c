@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:02:15 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 09:58:09 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 21:59:30 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char *argv[])
 	validate_args(argc, argv);
 	data = data_init();
 	parse_args(data, argc, argv);
-	sort(data);
+	sort(&data->a, &data->b);
 	free_data(data);
 	return (0);
 }

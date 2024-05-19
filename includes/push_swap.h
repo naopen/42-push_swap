@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 17:05:12 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 21:58:47 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,16 @@
 // | | *prev  | <-------| *prev  | <-------| *prev  | <-------| *prev  | |
 // | +--------+         +--------+         +--------+         +--------+ |
 // +---------------------------------------------------------------------+
+
+# define SORT_SIZE 4
+
 typedef struct s_node
 {
 	int				value;
+	int				index;
 	struct s_node	*next;
 	struct s_node	*prev;
+	bool			is_sorted;
 }					t_node;
 
 typedef struct s_stack
@@ -80,6 +85,7 @@ void				array_to_stack(int *array, t_stack *stack, int size);
 void				value_to_stack(t_stack *stack, int value);
 
 int					stack_size(t_stack *stack);
+int					unsorted_count(t_stack *stack);
 int					stack_max(t_stack *stack);
 int					stack_min(t_stack *stack);
 
@@ -92,18 +98,18 @@ void				free_data(t_sort_env *data);
 
 void				validate_args(int argc, char *argv[]);
 
-void				compress_coordinates(t_stack *a);
+void				compress_idx(t_stack *a);
 void				optimized_rotate(t_stack *stack, int index);
 void				optimized_push(t_stack *a, t_stack *b, int *indices,
 						int count);
 
 int					compare_int(const void *a, const void *b);
 
-void				sort(t_sort_env *data);
+void				sort(t_stack *a, t_stack *b);
 void				sort_two(t_stack *a);
 void				sort_three(t_stack *a);
 void				sort_four_to_six(t_stack *a, t_stack *b);
-void				sort_large(t_sort_env *data);
+void				sort_large(t_stack *a, t_stack *b);
 
 int get_stack_value(t_stack *stack, int index);
 

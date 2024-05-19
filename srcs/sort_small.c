@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:18:03 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 10:24:12 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 21:57:57 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	sort_two(t_stack *a)
 	int	first;
 	int	second;
 
-	if (stack_size(a) != 2)
+	if (a->size < 2)
 		return ;
 	first = a->sentinel->next->value;
 	second = a->sentinel->next->next->value;
@@ -43,8 +43,8 @@ void	sort_three(t_stack *a)
 	int	second;
 	int	third;
 
-	if (stack_size(a) != 3)
-		return ;
+	if (a->size < 3)
+		return (sort_two(a));
 	first = a->sentinel->next->value;
 	second = a->sentinel->next->next->value;
 	third = a->sentinel->next->next->next->value;
@@ -73,12 +73,10 @@ void	sort_three(t_stack *a)
 
 void	sort_four_to_six(t_stack *a, t_stack *b)
 {
-	int	size;
 	int	push_count;
 
-	size = stack_size(a);
 	push_count = 0;
-	while (size > 3)
+	while (stack_size(a) > 3)
 	{
 		if (a->sentinel->next->value == stack_min(a))
 		{
@@ -87,10 +85,8 @@ void	sort_four_to_six(t_stack *a, t_stack *b)
 		}
 		else
 			rotate_a(a);
-		size = stack_size(a);
 	}
 	sort_three(a);
 	while (push_count-- > 0)
 		push_a(a, b);
-	// printf("a: %d %d %d %d %d %d\n", a->sentinel->next->value, a->sentinel->next->next->value, a->sentinel->next->next->next->value, a->sentinel->next->next->next->next->value, a->sentinel->next->next->next->next->next->value, a->sentinel->next->next->next->next->next->next->value);
 }

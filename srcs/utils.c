@@ -6,15 +6,36 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:06:11 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 17:06:30 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 21:52:52 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
+// stack構造体のメンバーsizeにアクセスするだけの関数
+// 最初にスタックに入れる時及び、pushの度にsizeを更新しているため、
+// その値を返すだけで現在のスタックのサイズを取得できる
+
 int	stack_size(t_stack *stack)
 {
 	return (stack->size);
+}
+
+// まだソートされていないノードの数を返す
+int	unsorted_count(t_stack *stack)
+{
+	int		count;
+	t_node	*node;
+
+	count = 0;
+	node = stack->sentinel->next;
+	while (node != stack->sentinel)
+	{
+		if (node->is_sorted == 0)
+			count++;
+		node = node->next;
+	}
+	return (count);
 }
 
 int	stack_max(t_stack *stack)
@@ -26,7 +47,7 @@ int	stack_max(t_stack *stack)
 	node = stack->sentinel->next;
 	while (node != stack->sentinel)
 	{
-		if (node->value > max)
+		if (node->value > max && node->is_sorted == 0)
 			max = node->value;
 		node = node->next;
 	}
@@ -42,7 +63,7 @@ int	stack_min(t_stack *stack)
 	node = stack->sentinel->next;
 	while (node != stack->sentinel)
 	{
-		if (node->value < min)
+		if (node->value < min && node->is_sorted == 0)
 			min = node->value;
 		node = node->next;
 	}
@@ -59,7 +80,7 @@ int	get_stack_value(t_stack *stack, int index)
 	t_node	*node;
 	int		i;
 
-	if (index < 0 || index >= stack_size(stack))
+	if (index < 0 || index >= stack->size)
 		return (INT_MIN);
 	node = stack->sentinel->next;
 	i = 0;
