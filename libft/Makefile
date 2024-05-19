@@ -6,7 +6,7 @@
 #    By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/19 17:01:53 by nkannan           #+#    #+#              #
-#    Updated: 2024/05/05 08:47:32 by nkannan          ###   ########.fr        #
+#    Updated: 2024/05/19 09:01:57 by nkannan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,15 +26,17 @@ STRING_SRCS		=	string/ft_bzero.c string/ft_memchr.c string/ft_memcmp.c \
 					string/ft_strncmp.c string/ft_strnstr.c string/ft_strrchr.c \
 					string/ft_strtrim.c string/ft_substr.c \
 					string/ft_strcmp.c
+LIST_SRCS		=	list/ft_lstadd_back.c list/ft_lstadd_front.c \
+					list/ft_lstclear.c list/ft_lstdelone.c \
+					list/ft_lstiter.c list/ft_lstlast.c \
+					list/ft_lstmap.c list/ft_lstnew.c list/ft_lstsize.c
 
 
-SRCS			= $(CTYPE_SRCS) $(STDIO_SRCS) $(STDLIB_SRCS) $(STRING_SRCS)
+SRCS			= $(CTYPE_SRCS) $(STDIO_SRCS) $(STDLIB_SRCS) $(STRING_SRCS) $(LIST_SRCS)
 
 OBJS			= $(SRCS:.c=.o)
 
-BONUS			=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
-					ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
-					ft_lstmap.c ft_lstnew.c ft_lstsize.c
+BONUS			= $(LIST_SRCS)
 BONUS_OBJS		= $(BONUS:.c=.o)
 
 CC				= cc
