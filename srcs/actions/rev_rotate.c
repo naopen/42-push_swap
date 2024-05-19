@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:43:22 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 13:21:49 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 09:39:37 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	rev_rotate_a(t_stack *a)
 
 	if (stack_size(a) < 2)
 		return ;
-	node = a->end;
-	a->end = a->end->prev;
-	a->end->next = NULL;
-	node->prev = NULL;
-	node->next = a->top;
-	a->top->prev = node;
-	a->top = node;
+	node = a->sentinel->prev;
+	node->prev->next = a->sentinel;
+	a->sentinel->prev = node->prev;
+	node->next = a->sentinel->next;
+	node->prev = a->sentinel;
+	a->sentinel->next->prev = node;
+	a->sentinel->next = node;
 	ft_putendl_fd("rra", 1);
 }
 
@@ -36,13 +36,13 @@ void	rev_rotate_b(t_stack *b)
 
 	if (stack_size(b) < 2)
 		return ;
-	node = b->end;
-	b->end = b->end->prev;
-	b->end->next = NULL;
-	node->prev = NULL;
-	node->next = b->top;
-	b->top->prev = node;
-	b->top = node;
+	node = b->sentinel->prev;
+	node->prev->next = b->sentinel;
+	b->sentinel->prev = node->prev;
+	node->next = b->sentinel->next;
+	node->prev = b->sentinel;
+	b->sentinel->next->prev = node;
+	b->sentinel->next = node;
 	ft_putendl_fd("rrb", 1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:18:03 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 08:37:27 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 09:46:00 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	sort_two(t_stack *a)
 
 	if (stack_size(a) != 2)
 		return ;
-	first = a->top->value;
-	second = a->top->next->value;
+	first = a->sentinel->next->value;
+	second = a->sentinel->next->next->value;
 	if (first > second)
 		swap_a(a);
 }
@@ -45,10 +45,9 @@ void	sort_three(t_stack *a)
 
 	if (stack_size(a) != 3)
 		return ;
-	first = a->top->value;
-	second = a->top->next->value;
-	third = a->top->next->next->value;
-	printf("first: %d, second: %d, third: %d\n", first, second, third);
+	first = a->sentinel->next->value;
+	second = a->sentinel->next->next->value;
+	third = a->sentinel->next->next->next->value;
 	if (first > second && second > third)
 	{
 		swap_a(a);

@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 09:27:51 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 09:29:20 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ typedef struct s_node
 
 typedef struct s_stack
 {
-	t_node			*top;
-	t_node			*end;
+	t_node			*sentinel;
 	int				size;
 }					t_stack;
 

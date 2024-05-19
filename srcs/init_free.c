@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:08:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 09:22:28 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 09:31:40 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ t_sort_env	*data_init(void)
 {
 	t_sort_env	*new_data;
 
-	new_data = (t_sort_env *)malloc(sizeof(t_sort_env));
+	new_data = (t_sort_env *)ft_calloc(1, sizeof(t_sort_env));
 	if (!new_data)
 		exit(1);
-	new_data->a.sentinel = malloc(sizeof(t_node));
+	new_data->a.sentinel = ft_calloc(1, sizeof(t_node));
 	if (!new_data->a.sentinel)
 		exit(1);
 	new_data->a.sentinel->next = new_data->a.sentinel;
 	new_data->a.sentinel->prev = new_data->a.sentinel;
 	new_data->a.size = 0;
-	new_data->b.sentinel = malloc(sizeof(t_node));
+	new_data->b.sentinel = ft_calloc(1, sizeof(t_node));
 	if (!new_data->b.sentinel)
 		exit(1);
 	new_data->b.sentinel->next = new_data->b.sentinel;
@@ -38,8 +38,8 @@ void	free_stack(t_stack *stack)
 	t_node	*node;
 	t_node	*tmp;
 
-	node = stack->top;
-	while (node)
+	node = stack->sentinel->next;
+	while (node != stack->sentinel)
 	{
 		tmp = node;
 		node = node->next;

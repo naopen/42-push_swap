@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 01:45:42 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 04:08:51 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 09:45:00 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	compress_coordinates(t_stack *a)
 	array = (int *)malloc(sizeof(int) * size);
 	stack_to_array(a, array);
 	quick_sort_array(array, 0, size - 1);
-	node = a->top;
+	node = a->sentinel->next;
 	while (node)
 	{
 		i = 0;
@@ -123,7 +123,7 @@ static void	partition_stack(t_sort_env *data, int *indices, int size, int median
 	i = 0;
 	while (i < size)
 	{
-		if (data->a.top->value < median)
+		if (data->a.sentinel->next->value < median)
 			indices[count++] = i;
 		rotate_a(&data->a);
 		i++;
