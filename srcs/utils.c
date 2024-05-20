@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:06:11 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 21:52:52 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/21 04:34:43 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	unsorted_count(t_stack *stack)
 	t_node	*node;
 
 	count = 0;
-	node = stack->sentinel->next;
-	while (node != stack->sentinel)
+	node = stack->top;
+	while (node)
 	{
 		if (node->is_sorted == 0)
 			count++;
@@ -44,8 +44,8 @@ int	stack_max(t_stack *stack)
 	t_node	*node;
 
 	max = INT_MIN;
-	node = stack->sentinel->next;
-	while (node != stack->sentinel)
+	node = stack->top;
+	while (node)
 	{
 		if (node->value > max && node->is_sorted == 0)
 			max = node->value;
@@ -60,8 +60,8 @@ int	stack_min(t_stack *stack)
 	t_node	*node;
 
 	min = INT_MAX;
-	node = stack->sentinel->next;
-	while (node != stack->sentinel)
+	node = stack->top;
+	while (node)
 	{
 		if (node->value < min && node->is_sorted == 0)
 			min = node->value;
@@ -82,7 +82,7 @@ int	get_stack_value(t_stack *stack, int index)
 
 	if (index < 0 || index >= stack->size)
 		return (INT_MIN);
-	node = stack->sentinel->next;
+	node = stack->top;
 	i = 0;
 	while (i < index)
 	{

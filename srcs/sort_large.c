@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 01:45:42 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/20 00:49:53 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/21 04:21:58 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	compress_idx(t_stack *a)
 	array = (int *)calloc(size, sizeof(int));
 	stack_to_array(a, array);
 	quick_sort_array(array, 0, size - 1);
-	node = a->sentinel->next;
-	while (node != a->sentinel)
+	node = a->top;
+	while (node != a->end)
 	{
 		i = 0;
 		while (i < size)
@@ -172,9 +172,9 @@ void	push_half_to_b(t_stack *a, t_stack *b)
 
 	while (count < total_elements / 2 && checked_elements < total_elements)
 	{
-		if (a->sentinel->next->is_sorted == false)
+		if (a->top->is_sorted == false)
 		{
-			if (get_stack_value(a, 0) < median)
+			if (a->top->value < median)
 			{
 				push_b(a, b);
 				count++;
@@ -209,15 +209,15 @@ void	push_sorted_to_a(t_stack *a, t_stack *b)
 	while (stack_size(b) > 0)
 	{
 		push_a(a, b);
-		a->sentinel->next->is_sorted = true;
+		a->top->is_sorted = true;
 	}
 }
 
 // スタックがソートされているかを確認する関数
 bool is_sorted(t_stack *stack)
 {
-    t_node *current = stack->sentinel->next;
-    while (current->next != stack->sentinel)
+    t_node *current = stack->top;
+    while (current->next != stack->end)
     {
         if (current->value > current->next->value)
             return false;

@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 21:58:47 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/21 04:31:26 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 typedef struct s_node
 {
 	int				value;
-	int				index;
+	size_t			index;
 	struct s_node	*next;
 	struct s_node	*prev;
 	bool			is_sorted;
@@ -53,7 +53,8 @@ typedef struct s_node
 
 typedef struct s_stack
 {
-	t_node			*sentinel;
+	t_node			*top;
+	t_node			*end;
 	int				size;
 }					t_stack;
 
@@ -62,6 +63,7 @@ typedef struct s_sort_env
 	t_stack			a;
 	t_stack			b;
 }					t_sort_env;
+
 
 void				push_a(t_stack *a, t_stack *b);
 void				push_b(t_stack *a, t_stack *b);

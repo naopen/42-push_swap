@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:18:03 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 21:57:57 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/21 04:53:08 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	sort_two(t_stack *a)
 	int	first;
 	int	second;
 
-	if (a->size < 2)
-		return ;
-	first = a->sentinel->next->value;
-	second = a->sentinel->next->next->value;
+	first = a->top->value;
+	second = a->top->next->value;
 	if (first > second)
 		swap_a(a);
 }
@@ -43,11 +41,9 @@ void	sort_three(t_stack *a)
 	int	second;
 	int	third;
 
-	if (a->size < 3)
-		return (sort_two(a));
-	first = a->sentinel->next->value;
-	second = a->sentinel->next->next->value;
-	third = a->sentinel->next->next->next->value;
+	first = a->top->value;
+	second = a->top->next->value;
+	third = a->top->next->next->value;
 	if (first > second && second > third)
 	{
 		swap_a(a);
@@ -78,7 +74,7 @@ void	sort_four_to_six(t_stack *a, t_stack *b)
 	push_count = 0;
 	while (stack_size(a) > 3)
 	{
-		if (a->sentinel->next->value == stack_min(a))
+		if (a->top->value == stack_min(a))
 		{
 			push_b(a, b);
 			push_count++;

@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:37:05 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 09:40:17 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/21 04:44:43 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ void	swap_a(t_stack *a)
 
 	if (stack_size(a) < 2)
 		return ;
-	first = a->sentinel->next;
-	second = first->next;
+	first = a->top;
+	second = a->top->next;
 	first->next = second->next;
-	second->next->prev = first;
 	second->next = first;
-	second->prev = a->sentinel;
 	first->prev = second;
-	a->sentinel->next = second;
+	second->prev = NULL;
+	a->top = second;
 	ft_putendl_fd("sa", 1);
 }
 
@@ -39,14 +38,13 @@ void	swap_b(t_stack *b)
 
 	if (stack_size(b) < 2)
 		return ;
-	first = b->sentinel->next;
-	second = first->next;
+	first = b->top;
+	second = b->top->next;
 	first->next = second->next;
-	second->next->prev = first;
 	second->next = first;
-	second->prev = b->sentinel;
 	first->prev = second;
-	b->sentinel->next = second;
+	second->prev = NULL;
+	b->top = second;
 	ft_putendl_fd("sb", 1);
 }
 

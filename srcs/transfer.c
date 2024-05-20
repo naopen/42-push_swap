@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:43:05 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 09:35:21 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/21 04:47:24 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	stack_to_array(t_stack *stack, int *array)
 	t_node	*current;
 	int		i;
 
-	current = stack->sentinel->next;
+	current = stack->top;
 	i = 0;
-	while (current != stack->sentinel)
+	while (current != NULL)
 	{
 		array[i] = current->value;
 		i++;
@@ -33,6 +33,7 @@ void	array_to_stack(int *array, t_stack *stack, int size)
 	int		i;
 
 	free_stack(stack);
+	stack->end = NULL;
 	i = 0;
 	while (i < size)
 	{
@@ -40,11 +41,13 @@ void	array_to_stack(int *array, t_stack *stack, int size)
 		if (new_node == NULL)
 			malloc_error();
 		new_node->value = array[i];
-		new_node->next = stack->sentinel;
-		new_node->prev = stack->sentinel->prev;
-		stack->sentinel->prev->next = new_node;
-		stack->sentinel->prev = new_node;
-		stack->size++;
+		new_node->next = stack->top;
+		new_node->prev = NULL;
+		if (stack->top != NULL)
+			stack->top->prev = new_node;
+		stack->top = new_node;
+		if (stack->end == NULL)
+			stack->end = new_node;
 		i++;
 	}
 }
@@ -57,9 +60,12 @@ void	value_to_stack(t_stack *stack, int value)
 	if (!new_node)
 		malloc_error();
 	new_node->value = value;
-	new_node->next = stack->sentinel;
-	new_node->prev = stack->sentinel->prev;
-	stack->sentinel->prev->next = new_node;
-	stack->sentinel->prev = new_node;
+	new_node->next = NULL;
+	new_node->prev = stack->end;
+	if (stack->end != NULL)
+		stack->end->next = new_node;
+	else
+		stack->top = new_node;
+	stack->end = new_node;
 	stack->size++;
 }
