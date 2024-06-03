@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 01:45:42 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 05:22:13 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 05:32:51 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static void	bubble_sort(int *arr, int size)
 	}
 }
 
-// スタックaの値をソート済みの配列にコピーする
+// Copy the values of stack a to the sorted array
+
 static void	copy_stack_to_array(t_stack *a, int *sorted_arr)
 {
 	t_node	*temp;
@@ -52,7 +53,8 @@ static void	copy_stack_to_array(t_stack *a, int *sorted_arr)
 	}
 }
 
-// ソート済み配列を用いて、各ノードに圧縮インデックスを設定する
+// Set the compressed index for each node using the sorted array
+
 static void	set_compressed_idx(t_stack *a, int *sorted_arr)
 {
 	t_node	*temp;
@@ -72,7 +74,8 @@ static void	set_compressed_idx(t_stack *a, int *sorted_arr)
 	}
 }
 
-// スタックaの要素を直接比較して圧縮インデックスを計算する
+// Calculate the compressed index by directly comparing the elements of stack a
+
 void	compress_idx(t_stack *a)
 {
 	int	*sorted_arr;

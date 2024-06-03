@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 04:01:48 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 05:29:04 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 05:36:35 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	validate_args(int argc, char *argv[])
 	int	i;
 
 	if (argc == 1)
-		exit(0);
+		exit(EXIT_SUCCESS);
 	if (is_input_sorted(argc, argv))
-		exit(0);
+		exit(EXIT_SUCCESS);
 	if (has_duplicates(argc, argv))
 		args_error();
 	i = 1;

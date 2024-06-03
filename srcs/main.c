@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:02:15 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 05:12:38 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 05:37:51 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ void	parse_args(t_sort_env *data, int argc, char *argv[])
 		{
 			value = ft_atoi(&argv[i][j]);
 			if (value > INT_MAX || value < INT_MIN)
-			{
-				printf("value: %d\n", value);
 				args_error();
-			}
 			value_to_stack(&data->a, value);
 			while (ft_isdigit(argv[i][j]) || argv[i][j] == '-')
 				j++;
@@ -47,8 +44,7 @@ int	main(int argc, char *argv[])
 	validate_args(argc, argv);
 	data = data_init();
 	parse_args(data, argc, argv);
-	if (stack_size(&data->a) >= 7)
-		compress_idx(&data->a);
+	compress_idx(&data->a);
 	sort(&data->a, &data->b);
 	free_data(data);
 	return (0);
