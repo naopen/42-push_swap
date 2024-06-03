@@ -6,100 +6,85 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 01:45:42 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 04:26:28 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 05:22:13 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-// static void	move_to_stack_b(t_stack *a, t_stack *b, int min_val, int pivot_val)
-// {
-// 	int		index;
-// 	int		median;
-// 	t_node	*current;
+static void	bubble_sort(int *arr, int size)
+{
+	int	i;
+	int	j;
+	int	temp;
 
-// 	index = 0;
-// 	median = (pivot_val + min_val) / 2;
-// 	while (index < stack_size(a))
-// 	{
-// 		current = a->top;
-// 		if (current->compressed_value >= min_val
-// 			&& current->compressed_value <= pivot_val)
-// 		{
-// 			push_b(a, b);
-// 			if (current->compressed_value <= median)
-// 				rotate_b(b);
-// 		}
-// 		else
-// 			rotate_a(a);
-// 		index++;
-// 	}
-// }
+	i = 0;
+	while (i < size - 1)
+	{
+		j = 0;
+		while (j < size - i - 1)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
-// static void	move_all_to_stack_b(t_stack *a, t_stack *b)
-// {
-// 	int	i;
+// スタックaの値をソート済みの配列にコピーする
+static void	copy_stack_to_array(t_stack *a, int *sorted_arr)
+{
+	t_node	*temp;
+	int		i;
 
-// 	i = 0;
-// 	while (i < stack_size(a))
-// 	{
-// 		push_b(a, b);
-// 		i++;
-// 	}
-// }
+	temp = a->top;
+	i = 0;
+	while (i < a->size)
+	{
+		sorted_arr[i] = temp->value;
+		temp = temp->next;
+		i++;
+	}
+}
 
-// // スタックの中央値以上の値かどうかを判定する関数
-// static bool	is_value_above_mid(t_stack *stack, int value)
-// {
-// 	t_node	*current;
-// 	int		count;
-// 	int		i;
+// ソート済み配列を用いて、各ノードに圧縮インデックスを設定する
+static void	set_compressed_idx(t_stack *a, int *sorted_arr)
+{
+	t_node	*temp;
+	int		i;
+	int		j;
 
-// 	if (stack->top == NULL || stack->end == NULL)
-// 		return (false);
-// 	count = stack_size(stack);
-// 	i = 0;
-// 	current = stack->top;
-// 	while (i < count / 2)
-// 	{
-// 		if (current->compressed_value == value)
-// 			return (true);
-// 		current = current->next;
-// 		i++;
-// 	}
-// 	return (false);
-// }
+	temp = a->top;
+	i = 0;
+	while (i < a->size)
+	{
+		j = 0;
+		while (sorted_arr[j] != temp->value)
+			j++;
+		temp->compressed_value = j;
+		temp = temp->next;
+		i++;
+	}
+}
 
-// void	sort_large(t_stack *a, t_stack *b)
-// {
-// 	int	pivot;
-// 	int	min_val;
-// 	int	index;
+// スタックaの要素を直接比較して圧縮インデックスを計算する
+void	compress_idx(t_stack *a)
+{
+	int	*sorted_arr;
 
-// 	index = 1;
-// 	pivot = -1;
-// 	while (index < DIVISION)
-// 	{
-// 		min_val = pivot + 1;
-// 		pivot = stack_max(a) / DIVISION * index;
-// 		move_to_stack_b(a, b, min_val, pivot);
-// 		index++;
-// 	}
-// 	move_all_to_stack_b(a, b);
-// 	while (stack_size(b) > 0)
-// 	{
-// 		compress_idx(b);
-// 		if (b->top->compressed_value == stack_max(b))
-// 			push_a(a, b); // 最大値はaへ移動
-// 		else if (is_value_above_mid(b, stack_max(b)))
-// 			rotate_b(b); // 上半分に最大値がある場合は回転
-// 		else
-// 		{
-// 			rev_rotate_b(b); // それ以外は下半分に最大値があるので逆回転
-// 			push_a(a, b);    // 逆回転後、最大値をaへ移動
-// 		}
-// 	}
-// }
+	sorted_arr = (int *)malloc(sizeof(int) * (a->size));
+	if (!sorted_arr)
+		malloc_error();
+	copy_stack_to_array(a, sorted_arr);
+	bubble_sort(sorted_arr, a->size);
+	set_compressed_idx(a, sorted_arr);
+	free(sorted_arr);
+}
 
 void	sort_large(t_stack *a, t_stack *b)
 {

@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 04:26:49 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 05:18:43 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "../libft/libft.h"
 # include <limits.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 // sort_env has a and b stacks
 // stack has top and end nodes
@@ -46,7 +46,6 @@ typedef struct s_sort_env
 	t_stack			a;
 	t_stack			b;
 }					t_sort_env;
-
 
 void				push_a(t_stack *a, t_stack *b);
 void				push_b(t_stack *a, t_stack *b);
@@ -78,7 +77,6 @@ void				free_stack(t_stack *stack);
 void				free_data(t_sort_env *data);
 
 void				validate_args(int argc, char *argv[]);
-
 
 void				compress_idx(t_stack *a);
 
