@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:39:25 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/21 04:41:41 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 03:16:10 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,31 @@
 // Rotate stack A up by one
 void	rotate_a(t_stack *a)
 {
-	t_node	*node;
+	t_node	*temp;
 
-	if (a->top == NULL || a->end == NULL || stack_size(a) < 2)
+	if (stack_size(a) <= 1 || a->top == NULL || a->end == NULL)
 		return ;
-	if (a->top == a->end)
-		return ;
-	node = a->top;
+	temp = a->top;
 	a->top = a->top->next;
-	a->top->prev = NULL;
-	node->next = NULL;
-	a->end->next = node;
-	node->prev = a->end;
-	a->end = node;
-	ft_putendl_fd("ra", 1);
+	a->end->next = temp;
+	temp->next = NULL;
+	a->end = temp;
+	ft_putstr_fd("ra\n", 1);
 }
 
 // Rotate stack B up by one
 void	rotate_b(t_stack *b)
 {
-	t_node	*node;
+	t_node	*temp;
 
-	if (b->top == NULL || b->end == NULL || stack_size(b) < 2)
+	if (stack_size(b) <= 1 || b->top == NULL || b->end == NULL)
 		return ;
-	node = b->top;
+	temp = b->top;
 	b->top = b->top->next;
-	b->top->prev = NULL;
-	node->next = NULL;
-	b->end->next = node;
-	node->prev = b->end;
-	b->end = node;
-	ft_putendl_fd("rb", 1);
+	b->end->next = temp;
+	temp->next = NULL;
+	b->end = temp;
+	ft_putstr_fd("rb\n", 1);
 }
 
 // Rotate both stacks up by one
@@ -53,4 +47,5 @@ void	rotate_r(t_stack *a, t_stack *b)
 {
 	rotate_a(a);
 	rotate_b(b);
+	ft_putstr_fd("rr\n", 1);
 }

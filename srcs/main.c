@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:02:15 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/21 06:16:45 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 03:55:51 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ int	main(int argc, char *argv[])
 	validate_args(argc, argv);
 	data = data_init();
 	parse_args(data, argc, argv);
+	// 必要な場合は座標圧縮を行う
+	if (stack_size(&data->a) > 5)
+		compress_idx(&data->a);
 	sort(&data->a, &data->b);
 	free_data(data);
 	return (0);

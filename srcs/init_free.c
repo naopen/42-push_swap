@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:08:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/21 04:48:15 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 03:26:56 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,30 @@
 
 t_sort_env	*data_init(void)
 {
-	t_sort_env	*new_data;
+	t_sort_env	*data;
 
-	new_data = (t_sort_env *)ft_calloc(1, sizeof(t_sort_env));
-	if (!new_data)
-		exit(1);
-	new_data->a.top = NULL;
-	new_data->a.end = NULL;
-	new_data->a.size = 0;
-	new_data->b.top = NULL;
-	new_data->b.end = NULL;
-	new_data->b.size = 0;
-	return (new_data);
+	data = (t_sort_env *)malloc(sizeof(t_sort_env));
+	if (!data)
+		malloc_error();
+	data->a.top = NULL;
+	data->a.end = NULL;
+	data->a.size = 0;
+	data->b.top = NULL;
+	data->b.end = NULL;
+	data->b.size = 0;
+	return (data);
 }
 
 void	free_stack(t_stack *stack)
 {
-	t_node	*node;
-	t_node	*tmp;
+	t_node	*temp;
 
-	node = stack->top;
-	while (node)
+	while (stack->size)
 	{
-		tmp = node;
-		node = node->next;
-		free(tmp);
+		temp = stack->top->next;
+		free(stack->top);
+		stack->top = temp;
+		stack->size--;
 	}
 }
 

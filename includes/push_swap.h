@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 03:07:09 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 03:40:34 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void				value_to_stack(t_stack *stack, int value);
 int					stack_size(t_stack *stack);
 int					stack_max(t_stack *stack);
 int					stack_min(t_stack *stack);
+bool				is_sorted(t_stack *a);
 
 void				args_error(void);
 void				malloc_error(void);
@@ -78,6 +79,7 @@ void				free_stack(t_stack *stack);
 void				free_data(t_sort_env *data);
 
 void				validate_args(int argc, char *argv[]);
+
 
 void				compress_idx(t_stack *a);
 
