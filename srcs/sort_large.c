@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 01:45:42 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 02:36:12 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 02:48:26 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	move_to_stack_b(t_stack *a, t_stack *b, int min_val, int pivot_val)
 	while (index < stack_size(a))
 	{
 		current = a->top;
-		if (current->compressed_value <= pivot_val)
+		if (current->compressed_value >= min_val
+			&& current->compressed_value <= pivot_val)
 		{
 			push_b(a, b);
 			if (current->compressed_value <= median)
@@ -47,32 +48,27 @@ static void	move_all_to_stack_b(t_stack *a, t_stack *b)
 	}
 }
 
+// スタックの中央値以上の値かどうかを判定する関数
 static bool	is_value_above_mid(t_stack *stack, int value)
 {
 	t_node	*current;
-	t_node	*last;
+	int		count;
+	int		i;
 
-	if (stack->top == NULL || stack->end == NULL) // スタックが空の場合はfalseを返す
+	if (stack->top == NULL || stack->end == NULL)
 		return (false);
-
+	count = stack_size(stack);
+	i = 0;
 	current = stack->top;
-	last = stack->end;
-	// lastがNULLになることはないので、last->next != NULLのチェックは不要
-	while (current != NULL && last != NULL) // currentとlastがNULLでないことを確認
+	while (i < count / 2)
 	{
 		if (current->compressed_value == value)
 			return (true);
-		if (last->compressed_value == value)
-			return (false);
 		current = current->next;
-		last = last->prev;
-		// currentとlastが交差したら終了
-		if (current == last || current->next == last)
-			break;
+		i++;
 	}
 	return (false);
 }
-
 
 void	sort_large(t_stack *a, t_stack *b)
 {
@@ -92,11 +88,15 @@ void	sort_large(t_stack *a, t_stack *b)
 	move_all_to_stack_b(a, b);
 	while (stack_size(b) > 0)
 	{
+		compress_idx(b);
 		if (b->top->compressed_value == stack_max(b))
-			push_a(a, b);
+			push_a(a, b); // 最大値はaへ移動
 		else if (is_value_above_mid(b, stack_max(b)))
-			rotate_b(b);
+			rotate_b(b); // 上半分に最大値がある場合は回転
 		else
-			rev_rotate_b(b);
+		{
+			rev_rotate_b(b); // それ以外は下半分に最大値があるので逆回転
+			push_a(a, b);    // 逆回転後、最大値をaへ移動
+		}
 	}
 }
