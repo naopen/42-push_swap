@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 04:19:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 03:25:05 by nkannan          ###   ########.fr       */
+/*   Created: 2024/05/19 08:51:46 by nkannan           #+#    #+#             */
+/*   Updated: 2024/05/19 08:57:39 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../libft.h"
 
-void	args_error(void)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	ft_putstr_fd("Error\n", 2);
-	exit(EXIT_FAILURE);
-}
+	t_list	*last;
 
-void	malloc_error(void)
-{
-	ft_putstr_fd("Malloc Error\n", 2);
-	exit(EXIT_FAILURE);
+	if (lst == NULL || new == NULL)
+		return ;
+	last = ft_lstlast(*lst);
+	if (last == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	last->next = new;
 }

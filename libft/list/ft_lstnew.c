@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 04:19:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 03:25:05 by nkannan          ###   ########.fr       */
+/*   Created: 2024/05/19 08:54:14 by nkannan           #+#    #+#             */
+/*   Updated: 2024/05/19 09:04:36 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../libft.h"
 
-void	args_error(void)
+t_list	*ft_lstnew(void *content)
 {
-	ft_putstr_fd("Error\n", 2);
-	exit(EXIT_FAILURE);
-}
+	t_list	*node;
 
-void	malloc_error(void)
-{
-	ft_putstr_fd("Malloc Error\n", 2);
-	exit(EXIT_FAILURE);
+	node = ft_calloc(1, sizeof(t_list));
+	if (node == NULL)
+		return (NULL);
+	node->content = content;
+	node->next = NULL;
+	return (node);
 }

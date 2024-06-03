@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:37:05 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 13:22:54 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 05:09:43 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ void	swap_s(t_stack *a, t_stack *b)
 {
 	swap_a(a);
 	swap_b(b);
+	ft_putendl_fd("ss", 1);
 }

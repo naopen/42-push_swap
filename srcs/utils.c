@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   metrics.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:06:11 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/01 16:55:48 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 05:23:42 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,23 @@
 
 int	stack_size(t_stack *stack)
 {
-	int		size;
-	t_node	*node;
-
-	size = 0;
-	node = stack->top;
-	while (node)
-	{
-		size++;
-		node = node->next;
-	}
-	return (size);
+	return (stack->size);
 }
 
 int	stack_max(t_stack *stack)
 {
 	int		max;
-	t_node	*node;
+	t_node	*temp;
 
-	max = INT_MIN;
-	node = stack->top;
-	while (node)
+	if (stack_size(stack) == 0)
+		args_error();
+	temp = stack->top;
+	max = temp->value;
+	while (temp)
 	{
-		if (node->value > max)
-			max = node->value;
-		node = node->next;
+		if (max < temp->value)
+			max = temp->value;
+		temp = temp->next;
 	}
 	return (max);
 }
@@ -46,15 +38,34 @@ int	stack_max(t_stack *stack)
 int	stack_min(t_stack *stack)
 {
 	int		min;
-	t_node	*node;
+	t_node	*temp;
 
-	min = INT_MAX;
-	node = stack->top;
-	while (node)
+	if (stack_size(stack) == 0)
+		args_error();
+	temp = stack->top;
+	min = temp->value;
+	while (temp)
 	{
-		if (node->value < min)
-			min = node->value;
-		node = node->next;
+		if (min > temp->value)
+			min = temp->value;
+		temp = temp->next;
 	}
 	return (min);
+}
+
+bool	is_stack_sorted(t_stack *a)
+{
+	t_node	*temp;
+	int		i;
+
+	i = 0;
+	temp = a->top;
+	while (i < stack_size(a) - 1)
+	{
+		if (temp->value > temp->next->value)
+			return (false);
+		temp = temp->next;
+		i++;
+	}
+	return (true);
 }

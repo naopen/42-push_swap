@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 08:22:34 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/05 08:29:06 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 10:47:21 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,28 @@ static int	ft_is_overflow(unsigned long long num, int sign, unsigned int digit)
 	return (0);
 }
 
-long	ft_strtol(const char *str)
+static long	handle_overflow(int sign)
+{
+	if (sign == 1)
+		return (LONG_MAX);
+	else
+		return (LONG_MIN);
+}
+
+static int	get_digit(char c, int base)
+{
+	if (ft_isdigit(c))
+		return (c - '0');
+	else if (base > 10 && ft_isalpha(c))
+		return (ft_tolower(c) - 'a' + 10);
+	return (-1);
+}
+
+long	ft_strtol(const char *str, char **endptr, int base)
 {
 	unsigned long long	num;
 	int					sign;
+	int					digit;
 
 	num = 0;
 	sign = 1;
@@ -49,16 +67,16 @@ long	ft_strtol(const char *str)
 		sign *= -1;
 	if (*str == '-' || *str == '+')
 		str++;
-	while (ft_isdigit(*str))
+	digit = get_digit(*str, base);
+	while (*str && digit >= 0)
 	{
-		if (ft_is_overflow(num, sign, *str - '0'))
-		{
-			if (sign == 1)
-				return (LONG_MAX);
-			else
-				return (LONG_MIN);
-		}
-		num = num * 10 + (*str++ - '0');
+		if (digit >= base || ft_is_overflow(num, sign, digit))
+			return (handle_overflow(sign));
+		num = num * base + digit;
+		str++;
+		digit = get_digit(*str, base);
 	}
+	if (endptr)
+		*endptr = (char *)str;
 	return (num * sign);
 }

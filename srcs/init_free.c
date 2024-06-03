@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup.c                                            :+:      :+:    :+:   */
+/*   init_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:08:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/04 04:02:58 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 04:58:23 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_data	*data_init(void)
+t_sort_env	*data_init(void)
 {
-	t_data	*new_data;
+	t_sort_env	*data;
 
-	new_data = (t_data *)malloc(sizeof(t_data));
-	if (!new_data)
-		exit(1);
-	new_data->a.top = NULL;
-	new_data->a.end = NULL;
-	new_data->b.top = NULL;
-	new_data->b.end = NULL;
-	return (new_data);
+	data = (t_sort_env *)malloc(sizeof(t_sort_env));
+	if (!data)
+		malloc_error();
+	data->a.top = NULL;
+	data->a.end = NULL;
+	data->a.size = 0;
+	data->b.top = NULL;
+	data->b.end = NULL;
+	data->b.size = 0;
+	return (data);
 }
 
 void	free_stack(t_stack *stack)
@@ -40,7 +42,7 @@ void	free_stack(t_stack *stack)
 	}
 }
 
-void	free_data(t_data *data)
+void	free_data(t_sort_env *data)
 {
 	free_stack(&data->a);
 	free_stack(&data->b);

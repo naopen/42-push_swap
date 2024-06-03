@@ -6,13 +6,13 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 04:01:48 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/05 08:37:35 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 04:49:47 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int	is_sorted(int argc, char *argv[])
+static int	is_input_sorted(int argc, char *argv[])
 {
 	int	i;
 	int	prev;
@@ -55,7 +55,11 @@ void	validate_args(int argc, char *argv[])
 {
 	int	i;
 
-	if (is_sorted(argc, argv) || has_duplicates(argc, argv))
+	if (argc == 1)
+		exit(0);
+	if (is_input_sorted(argc, argv))
+		exit(0);
+	if (has_duplicates(argc, argv))
 		args_error();
 	i = 1;
 	while (i < argc)
@@ -65,3 +69,31 @@ void	validate_args(int argc, char *argv[])
 		i++;
 	}
 }
+
+// void	validate_args(int argc, char *argv[])
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 1;
+// 	while (i < argc)
+// 	{
+// 		j = 0;
+// 		if (argv[i][j] == '-' || argv[i][j] == '+')
+// 			j++;
+// 		while (argv[i][j])
+// 		{
+// 			if (!ft_isdigit(argv[i][j]))
+// 				args_error();
+// 			j++;
+// 		}
+// 		j = 1;
+// 		while (j < argc)
+// 		{
+// 			if (j != i && !ft_strncmp(argv[i], argv[j], ft_strlen(argv[i]) + 1))
+// 				args_error();
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }

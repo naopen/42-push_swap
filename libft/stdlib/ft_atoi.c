@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:38:20 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/05 08:47:55 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/19 10:48:49 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@
 
 int	ft_atoi(const char *str)
 {
-	return ((int)ft_strtol(str));
+	return ((int)ft_strtol(str, NULL, 10));
 }

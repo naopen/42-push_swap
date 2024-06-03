@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 04:19:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 03:25:05 by nkannan          ###   ########.fr       */
+/*   Created: 2024/05/19 08:53:24 by nkannan           #+#    #+#             */
+/*   Updated: 2024/05/19 09:04:45 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../libft.h"
 
-void	args_error(void)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	ft_putstr_fd("Error\n", 2);
-	exit(EXIT_FAILURE);
-}
+	t_list	*tmp_list;
 
-void	malloc_error(void)
-{
-	ft_putstr_fd("Malloc Error\n", 2);
-	exit(EXIT_FAILURE);
+	if (lst == NULL || f == NULL)
+		return ;
+	while (lst != NULL)
+	{
+		tmp_list = lst;
+		f(tmp_list->content);
+		lst = lst->next;
+	}
 }

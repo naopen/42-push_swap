@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 04:19:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 03:25:05 by nkannan          ###   ########.fr       */
+/*   Created: 2024/05/19 09:04:27 by nkannan           #+#    #+#             */
+/*   Updated: 2024/05/19 09:04:30 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../libft.h"
 
-void	args_error(void)
+int	ft_lstsize(t_list *lst)
 {
-	ft_putstr_fd("Error\n", 2);
-	exit(EXIT_FAILURE);
-}
+	size_t	i;
 
-void	malloc_error(void)
-{
-	ft_putstr_fd("Malloc Error\n", 2);
-	exit(EXIT_FAILURE);
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return ((int)i);
 }
