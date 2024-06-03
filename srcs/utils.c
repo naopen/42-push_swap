@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:06:11 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 02:41:03 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 03:06:41 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,6 @@
 int	stack_size(t_stack *stack)
 {
 	return (stack->size);
-}
-
-// まだソートされていないノードの数を返す
-int	unsorted_count(t_stack *stack)
-{
-	int		count;
-	t_node	*node;
-
-	count = 0;
-	node = stack->top;
-	while (node)
-	{
-		if (node->is_sorted == 0)
-			count++;
-		node = node->next;
-	}
-	return (count);
 }
 
 int	stack_max(t_stack *stack)
@@ -72,28 +55,6 @@ int	stack_min(t_stack *stack)
 		node = node->next;
 	}
 	return (min);
-}
-
-int	compare_int(const void *a, const void *b)
-{
-	return (*(int *)a - *(int *)b);
-}
-
-int	get_stack_value(t_stack *stack, int index)
-{
-	t_node	*node;
-	int		i;
-
-	if (index < 0 || index >= stack->size)
-		return (INT_MIN);
-	node = stack->top;
-	i = 0;
-	while (i < index)
-	{
-		node = node->next;
-		i++;
-	}
-	return (node->value);
 }
 
 // 各要素の値と、その値がソート済み配列の何番目に位置するかを計算し、
