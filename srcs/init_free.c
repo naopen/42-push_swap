@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:08:12 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 03:26:56 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 04:58:23 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ t_sort_env	*data_init(void)
 
 void	free_stack(t_stack *stack)
 {
-	t_node	*temp;
+	t_node	*node;
+	t_node	*tmp;
 
-	while (stack->size)
+	node = stack->top;
+	while (node)
 	{
-		temp = stack->top->next;
-		free(stack->top);
-		stack->top = temp;
-		stack->size--;
+		tmp = node;
+		node = node->next;
+		free(tmp);
 	}
 }
 
