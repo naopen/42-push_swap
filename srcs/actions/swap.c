@@ -6,13 +6,16 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:37:05 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 08:26:59 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 08:31:04 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
 // Replace the top two elements of stack A
+// * Update second->next->prev only if first->next is not NULL
+// * Update the end of the stack if the number of elements is 2
+
 void	swap_a(t_stack *a)
 {
 	t_node	*first;
@@ -23,14 +26,12 @@ void	swap_a(t_stack *a)
 	first = a->top;
 	second = a->top->next;
 	first->next = second->next;
-	// 修正: first->nextがNULLでない場合のみ、second->nextのprevを更新する
 	if (first->next)
 		first->next->prev = first;
 	second->next = first;
 	first->prev = second;
 	second->prev = NULL;
 	a->top = second;
-	// 修正: スタックの要素数が2つの場合、末尾(a->end)を更新する
 	if (stack_size(a) == 2)
 		a->end = first;
 	ft_putendl_fd("sa", 1);

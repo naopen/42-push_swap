@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:02:15 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 08:11:01 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 08:32:14 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ static void	parse_args(t_sort_env *data, int argc, char *argv[])
 		i++;
 	}
 }
-
-#include <libc.h>
-
-__attribute__((destructor))
-static void destructor() {
-    system("leaks -q push_swap");
-}
-
 
 int	main(int argc, char *argv[])
 {
