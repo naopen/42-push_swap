@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 04:01:48 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 04:49:47 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 05:29:04 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,31 +69,3 @@ void	validate_args(int argc, char *argv[])
 		i++;
 	}
 }
-
-// void	validate_args(int argc, char *argv[])
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 1;
-// 	while (i < argc)
-// 	{
-// 		j = 0;
-// 		if (argv[i][j] == '-' || argv[i][j] == '+')
-// 			j++;
-// 		while (argv[i][j])
-// 		{
-// 			if (!ft_isdigit(argv[i][j]))
-// 				args_error();
-// 			j++;
-// 		}
-// 		j = 1;
-// 		while (j < argc)
-// 		{
-// 			if (j != i && !ft_strncmp(argv[i], argv[j], ft_strlen(argv[i]) + 1))
-// 				args_error();
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
