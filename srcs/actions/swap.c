@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:37:05 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 05:09:43 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 08:26:59 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,16 @@ void	swap_a(t_stack *a)
 	first = a->top;
 	second = a->top->next;
 	first->next = second->next;
+	// 修正: first->nextがNULLでない場合のみ、second->nextのprevを更新する
+	if (first->next)
+		first->next->prev = first;
 	second->next = first;
 	first->prev = second;
 	second->prev = NULL;
 	a->top = second;
+	// 修正: スタックの要素数が2つの場合、末尾(a->end)を更新する
+	if (stack_size(a) == 2)
+		a->end = first;
 	ft_putendl_fd("sa", 1);
 }
 
@@ -41,10 +47,14 @@ void	swap_b(t_stack *b)
 	first = b->top;
 	second = b->top->next;
 	first->next = second->next;
+	if (first->next)
+		first->next->prev = first;
 	second->next = first;
 	first->prev = second;
 	second->prev = NULL;
 	b->top = second;
+	if (stack_size(b) == 2)
+		b->end = first;
 	ft_putendl_fd("sb", 1);
 }
 
