@@ -6,13 +6,13 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:02:15 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 05:37:51 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 05:51:36 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	parse_args(t_sort_env *data, int argc, char *argv[])
+static void	parse_args(t_sort_env *data, int argc, char *argv[])
 {
 	int		i;
 	int		j;

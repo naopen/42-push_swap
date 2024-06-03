@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 05:18:43 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 05:52:55 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,12 @@
 
 # include "../libft/libft.h"
 # include <limits.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
 // sort_env has a and b stacks
 // stack has top and end nodes
 // node has next and prev nodes
-
-# define SORT_SIZE 4
-# define DIVISION 8
 
 typedef struct s_node
 {
@@ -62,12 +58,7 @@ void				swap_a(t_stack *a);
 void				swap_b(t_stack *b);
 void				swap_s(t_stack *a, t_stack *b);
 
-void				value_to_stack(t_stack *stack, int value);
-
-int					stack_size(t_stack *stack);
-int					stack_max(t_stack *stack);
-int					stack_min(t_stack *stack);
-bool				is_stack_sorted(t_stack *a);
+void				validate_args(int argc, char *argv[]);
 
 void				args_error(void);
 void				malloc_error(void);
@@ -76,8 +67,6 @@ t_sort_env			*data_init(void);
 void				free_stack(t_stack *stack);
 void				free_data(t_sort_env *data);
 
-void				validate_args(int argc, char *argv[]);
-
 void				compress_idx(t_stack *a);
 
 void				sort(t_stack *a, t_stack *b);
@@ -85,5 +74,11 @@ void				sort_two(t_stack *a);
 void				sort_three(t_stack *a);
 void				sort_four_to_six(t_stack *a, t_stack *b);
 void				sort_large(t_stack *a, t_stack *b);
+
+int					stack_size(t_stack *stack);
+int					stack_max(t_stack *stack);
+int					stack_min(t_stack *stack);
+bool				is_stack_sorted(t_stack *a);
+void				value_to_stack(t_stack *stack, int value);
 
 #endif
