@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:43:22 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/21 04:41:17 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/22 18:18:51 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	rev_rotate_a(t_stack *a)
 {
 	t_node	*node;
 
-	if (stack_size(a) < 2)
+	if (a->top == NULL || a->end == NULL || stack_size(a) < 2)
 		return ;
 	node = a->end;
 	a->end = a->end->prev;
@@ -34,7 +34,7 @@ void	rev_rotate_b(t_stack *b)
 {
 	t_node	*node;
 
-	if (stack_size(b) < 2)
+	if (b->top == NULL || b->end == NULL || stack_size(b) < 2)
 		return ;
 	node = b->end;
 	b->end = b->end->prev;

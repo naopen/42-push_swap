@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/21 04:31:26 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/21 05:35:33 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@
 // +---------------------------------------------------------------------+
 
 # define SORT_SIZE 4
+# define DIVISION 8
 
 typedef struct s_node
 {
 	int				value;
-	size_t			index;
+	int				compressed_value;
 	struct s_node	*next;
 	struct s_node	*prev;
 	bool			is_sorted;
@@ -80,8 +81,6 @@ void				swap_a(t_stack *a);
 void				swap_b(t_stack *b);
 void				swap_s(t_stack *a, t_stack *b);
 
-void				radix_sort(t_stack *a, t_stack *b, int size);
-
 void				stack_to_array(t_stack *stack, int *array);
 void				array_to_stack(int *array, t_stack *stack, int size);
 void				value_to_stack(t_stack *stack, int value);
@@ -90,6 +89,8 @@ int					stack_size(t_stack *stack);
 int					unsorted_count(t_stack *stack);
 int					stack_max(t_stack *stack);
 int					stack_min(t_stack *stack);
+
+void				radix_sort(t_stack *a, t_stack *b, int size);
 
 void				args_error(void);
 void				malloc_error(void);
@@ -104,6 +105,8 @@ void				compress_idx(t_stack *a);
 void				optimized_rotate(t_stack *stack, int index);
 void				optimized_push(t_stack *a, t_stack *b, int *indices,
 						int count);
+
+void				compress_coordinates(t_stack *a);
 
 int					compare_int(const void *a, const void *b);
 

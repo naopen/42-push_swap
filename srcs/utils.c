@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:06:11 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/21 04:34:43 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/05/21 06:09:06 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ int	stack_max(t_stack *stack)
 
 	max = INT_MIN;
 	node = stack->top;
+	if (node == NULL)
+		exit(1);
 	while (node)
 	{
-		if (node->value > max && node->is_sorted == 0)
+		if (node->value > max)
 			max = node->value;
 		node = node->next;
 	}
@@ -61,9 +63,11 @@ int	stack_min(t_stack *stack)
 
 	min = INT_MAX;
 	node = stack->top;
+	if (node == NULL)
+		exit(1);
 	while (node)
 	{
-		if (node->value < min && node->is_sorted == 0)
+		if (node->value < min)
 			min = node->value;
 		node = node->next;
 	}
@@ -90,4 +94,26 @@ int	get_stack_value(t_stack *stack, int index)
 		i++;
 	}
 	return (node->value);
+}
+
+void	compress_coordinates(t_stack *a)
+{
+	t_node	*current;
+	t_node	*compare;
+
+	if (a == NULL || a->top == NULL)
+		return ;
+	current = a->top;
+	while (current != NULL)
+	{
+		current->compressed_value = 0;
+		compare = a->top;
+		while (compare != NULL)
+		{
+			if (current->value >= compare->value)
+				current->compressed_value++;
+			compare = compare->next;
+		}
+		current = current->next;
+	}
 }
