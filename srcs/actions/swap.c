@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:37:05 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 04:44:05 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 05:09:43 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,36 @@
 // Replace the top two elements of stack A
 void	swap_a(t_stack *a)
 {
-	t_node	*temp;
+	t_node	*first;
+	t_node	*second;
 
-	if (stack_size(a) <= 1)
+	if (stack_size(a) < 2)
 		return ;
-	temp = a->top->next;
-	a->top->next = temp->next;
-	temp->next = a->top;
-	a->top = temp;
+	first = a->top;
+	second = a->top->next;
+	first->next = second->next;
+	second->next = first;
+	first->prev = second;
+	second->prev = NULL;
+	a->top = second;
 	ft_putendl_fd("sa", 1);
 }
 
 // Replace the top two elements of stack B
 void	swap_b(t_stack *b)
 {
-	t_node	*temp;
+	t_node	*first;
+	t_node	*second;
 
-	if (stack_size(b) <= 1)
+	if (stack_size(b) < 2)
 		return ;
-	temp = b->top->next;
-	b->top->next = temp->next;
-	temp->next = b->top;
-	b->top = temp;
+	first = b->top;
+	second = b->top->next;
+	first->next = second->next;
+	second->next = first;
+	first->prev = second;
+	second->prev = NULL;
+	b->top = second;
 	ft_putendl_fd("sb", 1);
 }
 
