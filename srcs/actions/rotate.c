@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:39:25 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 04:14:42 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 04:38:48 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ void	rotate_r(t_stack *a, t_stack *b)
 {
 	rotate_a(a);
 	rotate_b(b);
+	ft_putendl_fd("rr", 1);
 }

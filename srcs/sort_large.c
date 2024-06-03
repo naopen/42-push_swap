@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 01:45:42 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 03:49:48 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 04:26:28 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	sort_large(t_stack *a, t_stack *b)
 
 	i = 0;
 	size_a_init = a->size;
-	while (!is_sorted(a))
+	while (!is_stack_sorted(a))
 	{
 		j = 0;
 		while (j++ < size_a_init)

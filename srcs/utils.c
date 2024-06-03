@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:06:11 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 03:38:59 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 04:51:12 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	stack_min(t_stack *stack)
 	return (min);
 }
 
-bool	is_sorted(t_stack *a)
+bool	is_stack_sorted(t_stack *a)
 {
 	t_node	*temp;
 	int		i;

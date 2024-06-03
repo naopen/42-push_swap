@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 03:40:34 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 04:26:49 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_node
 	int				compressed_value;
 	struct s_node	*next;
 	struct s_node	*prev;
-	bool			is_sorted;
 }					t_node;
 
 typedef struct s_stack
@@ -69,7 +68,7 @@ void				value_to_stack(t_stack *stack, int value);
 int					stack_size(t_stack *stack);
 int					stack_max(t_stack *stack);
 int					stack_min(t_stack *stack);
-bool				is_sorted(t_stack *a);
+bool				is_stack_sorted(t_stack *a);
 
 void				args_error(void);
 void				malloc_error(void);
