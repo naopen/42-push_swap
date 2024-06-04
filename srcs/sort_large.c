@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 01:45:42 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 05:32:51 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 07:45:19 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ static void	copy_stack_to_array(t_stack *a, int *sorted_arr)
 static void	set_compressed_idx(t_stack *a, int *sorted_arr)
 {
 	t_node	*temp;
-	int		i;
-	int		j;
+	size_t		i;
+	size_t		j;
 
 	temp = a->top;
 	i = 0;
-	while (i < a->size)
+	while (i < (size_t)a->size)
 	{
 		j = 0;
 		while (sorted_arr[j] != temp->value)
@@ -83,6 +83,7 @@ void	compress_idx(t_stack *a)
 	sorted_arr = (int *)malloc(sizeof(int) * (a->size));
 	if (!sorted_arr)
 		malloc_error();
+	printf("Address3: %p\n", (void*)sorted_arr);
 	copy_stack_to_array(a, sorted_arr);
 	bubble_sort(sorted_arr, a->size);
 	set_compressed_idx(a, sorted_arr);

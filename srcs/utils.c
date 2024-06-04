@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 04:06:11 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 05:29:33 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 07:44:47 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	value_to_stack(t_stack *stack, int value)
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
 		malloc_error();
+	printf("Address2: %p\n", (void*)new_node);
 	new_node->value = value;
 	new_node->next = NULL;
 	if (!stack->top)

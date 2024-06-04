@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:18:03 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/21 04:53:08 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 08:20:11 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	sort_two(t_stack *a)
 
 void	sort_three(t_stack *a)
 {
-	int	first;
-	int	second;
-	int	third;
+	long	first;
+	long	second;
+	long	third;
 
 	first = a->top->value;
 	second = a->top->next->value;

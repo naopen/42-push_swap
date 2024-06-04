@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 00:59:58 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 05:52:55 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 07:46:10 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
+#include <stdio.h>
 
 // sort_env has a and b stacks
 // stack has top and end nodes
@@ -66,6 +67,7 @@ void				malloc_error(void);
 t_sort_env			*data_init(void);
 void				free_stack(t_stack *stack);
 void				free_data(t_sort_env *data);
+void				free_node(t_stack *stack);
 
 void				compress_idx(t_stack *a);
 
