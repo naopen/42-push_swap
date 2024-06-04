@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:37:05 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 08:31:04 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:53:48 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	swap_a(t_stack *a)
 	t_node	*first;
 	t_node	*second;
 
-	if (stack_size(a) < 2)
+	if (stack_size(a) <= 1)
 		return ;
 	first = a->top;
 	second = a->top->next;
@@ -43,7 +43,7 @@ void	swap_b(t_stack *b)
 	t_node	*first;
 	t_node	*second;
 
-	if (stack_size(b) < 2)
+	if (stack_size(b) <= 1)
 		return ;
 	first = b->top;
 	second = b->top->next;

@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 03:39:25 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 04:38:48 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:56:23 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void	rotate_a(t_stack *a)
 {
 	t_node	*temp;
 
-	if (a->top == NULL || a->end == NULL || stack_size(a) < 2)
-		return ;
-	if (a->top == a->end)
+	if (a->top == NULL || a->end == NULL || stack_size(a) <= 1)
 		return ;
 	temp = a->top;
 	a->top = a->top->next;
@@ -36,7 +34,7 @@ void	rotate_b(t_stack *b)
 {
 	t_node	*temp;
 
-	if (b->top == NULL || b->end == NULL || stack_size(b) < 2)
+	if (b->top == NULL || b->end == NULL || stack_size(b) <= 1)
 		return ;
 	temp = b->top;
 	b->top = b->top->next;
