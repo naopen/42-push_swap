@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 08:31:54 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/19 10:47:40 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/13 21:53:45 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_isinteger(char *str)
 {
 	long	num;
 	size_t	i;
+	char	*endptr;
 
 	i = 0;
 	if (str[i] == '\0')
@@ -30,8 +31,10 @@ int	ft_isinteger(char *str)
 			return (0);
 		i++;
 	}
-	num = ft_strtol(str, NULL, 10);
-	if (num < INT_MIN || num > INT_MAX)
+	num = ft_strtol(str, &endptr, 10);
+	if (*endptr != '\0' || num > INT_MAX || num < INT_MIN)
+		return (0);
+	if (*endptr == '\0' && num == 0 && (str[0] == '-' || str[0] == '+'))
 		return (0);
 	return (1);
 }

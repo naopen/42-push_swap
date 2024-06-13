@@ -6,11 +6,25 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 04:01:48 by nkannan           #+#    #+#             */
-/*   Updated: 2024/06/04 05:36:35 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/13 21:43:29 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+static int	is_input_integer(int argc, char *argv[])
+{
+	int	i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (!ft_isinteger(argv[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 static int	is_input_sorted(int argc, char *argv[])
 {
@@ -55,6 +69,8 @@ void	validate_args(int argc, char *argv[])
 {
 	int	i;
 
+	if (!is_input_integer(argc, argv))
+		args_error();
 	if (argc == 1)
 		exit(EXIT_SUCCESS);
 	if (is_input_sorted(argc, argv))
