@@ -6,7 +6,7 @@
 /*   By: nkannan <nkannan@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:18:03 by nkannan           #+#    #+#             */
-/*   Updated: 2024/05/21 04:53:08 by nkannan          ###   ########.fr       */
+/*   Updated: 2024/06/16 23:30:45 by nkannan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,34 @@ void	sort_three(t_stack *a)
 		swap_a(a);
 }
 
+// Get the index of the minimum value in the stack
+static int	get_min_index(t_stack *stack)
+{
+	int		min_value;
+	int		min_index;
+	int		i;
+	t_node	*temp;
+
+	if (stack_size(stack) == 0)
+		return (-1);
+	temp = stack->top;
+	min_value = temp->value;
+	min_index = 0;
+	i = 1;
+	temp = temp->next;
+	while (temp)
+	{
+		if (temp->value < min_value)
+		{
+			min_value = temp->value;
+			min_index = i;
+		}
+		temp = temp->next;
+		i++;
+	}
+	return (min_index);
+}
+
 // Sort four, five or six elements in stack a
 // 1. Push smallest elements to b until 3 elements remain in a
 // 2. Sort 3 elements in a
@@ -69,20 +97,19 @@ void	sort_three(t_stack *a)
 
 void	sort_four_to_six(t_stack *a, t_stack *b)
 {
-	int	push_count;
+	int	min_index;
 
-	push_count = 0;
 	while (stack_size(a) > 3)
 	{
-		if (a->top->value == stack_min(a))
-		{
+		min_index = get_min_index(a);
+		if (min_index == 0)
 			push_b(a, b);
-			push_count++;
-		}
-		else
+		else if (min_index < stack_size(a) / 2)
 			rotate_a(a);
+		else
+			rev_rotate_a(a);
 	}
 	sort_three(a);
-	while (push_count-- > 0)
+	while (stack_size(b) > 0)
 		push_a(a, b);
 }
